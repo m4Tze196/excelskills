@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/40 bg-background">
+    <footer className="border-t border-border/40 bg-background" role="contentinfo">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
@@ -16,7 +16,7 @@ export function Footer() {
           </div>
 
           {/* Skills */}
-          <div className="space-y-3">
+          <nav className="space-y-3" aria-label="Skills Navigation">
             <h4 className="text-sm font-semibold">Skills</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
@@ -40,10 +40,10 @@ export function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
           {/* Courses */}
-          <div className="space-y-3">
+          <nav className="space-y-3" aria-label="Courses Navigation">
             <h4 className="text-sm font-semibold">Courses</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
@@ -67,10 +67,10 @@ export function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
           {/* Resources */}
-          <div className="space-y-3">
+          <nav className="space-y-3" aria-label="Resources Navigation">
             <h4 className="text-sm font-semibold">Resources</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
@@ -89,7 +89,7 @@ export function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
         </div>
 
         <div className="mt-12 pt-8 border-t border-border/40">

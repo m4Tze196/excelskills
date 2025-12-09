@@ -1,9 +1,8 @@
-import { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Excel Skills Directory - ExcelSkills",
-  description: "Browse our comprehensive Excel skills directory covering formulas, functions, data analysis, and more.",
-};
+import { useState, useEffect } from "react";
+import { SkillsDirectorySkeleton } from "@/components/ui/skeleton";
+import { useToast } from "@/components/ui/toast-provider";
 
 type Skill = {
   id: string;
@@ -96,6 +95,31 @@ function getDifficultyColor(difficulty: string) {
 }
 
 export default function SkillsPage() {
+  const { showToast } = useToast();
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedDifficulty, setSelectedDifficulty] = useState("All");
+
+  useEffect(() => {
+    // Simulate data loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      showToast("Skills loaded successfully!", "success", 3000);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [showToast]);
+
+  const filteredSkills = skills.filter((skill) => {
+    const categoryMatch = selectedCategory === "All" || skill.category === selectedCategory;
+    const difficultyMatch = selectedDifficulty === "All" || skill.difficulty === selectedDifficulty;
+    return categoryMatch && difficultyMatch;
+  });
+
+  if (isLoading) {
+    return <SkillsDirectorySkeleton />;
+  }
+
   return (
     <div className="container mx-auto px-4 py-12">
       {/* Header */}
@@ -108,7 +132,7 @@ export default function SkillsPage() {
         </p>
       </div>
 
-      {/* Filters - Placeholder for future interactivity */}
+      {/* Filters */}
       <div className="mb-8 space-y-4">
         <div>
           <h3 className="text-sm font-semibold mb-2">Category</h3>
@@ -116,8 +140,12 @@ export default function SkillsPage() {
             {categories.map((category) => (
               <button
                 key={category}
+                onClick={() => {
+                  setSelectedCategory(category);
+                  showToast(`Filtered by ${category}`, "info", 2000);
+                }}
                 className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
-                  category === "All"
+                  category === selectedCategory
                     ? "bg-primary text-primary-foreground border-primary"
                     : "bg-background text-foreground border-border hover:bg-muted"
                 }`}
@@ -134,8 +162,12 @@ export default function SkillsPage() {
             {difficulties.map((difficulty) => (
               <button
                 key={difficulty}
+                onClick={() => {
+                  setSelectedDifficulty(difficulty);
+                  showToast(`Filtered by ${difficulty}`, "info", 2000);
+                }}
                 className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
-                  difficulty === "All"
+                  difficulty === selectedDifficulty
                     ? "bg-primary text-primary-foreground border-primary"
                     : "bg-background text-foreground border-border hover:bg-muted"
                 }`}
@@ -149,7 +181,12 @@ export default function SkillsPage() {
 
       {/* Skills Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {skills.map((skill) => (
+        {filteredSkills.length === 0 ? (
+          <div className="col-span-full text-center py-12">
+            <p className="text-muted-foreground">No skills found matching your filters.</p>
+          </div>
+        ) : (
+          filteredSkills.map((skill) => (
           <div
             key={skill.id}
             className="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow cursor-pointer group"
@@ -189,7 +226,8 @@ export default function SkillsPage() {
               </span>
             </div>
           </div>
-        ))}
+          ))
+        )}
       </div>
 
       {/* CTA */}

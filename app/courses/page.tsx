@@ -113,17 +113,17 @@ export default function CoursesPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       {/* Header */}
-      <div className="max-w-3xl mb-12">
+      <header className="max-w-3xl mb-12">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
           Excel Courses
         </h1>
         <p className="text-xl text-muted-foreground">
           Structured learning paths to take you from Excel novice to expert. Learn at your own pace with hands-on practice.
         </p>
-      </div>
+      </header>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+      <section className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12" aria-label="Course Statistics">
         <div className="bg-card border border-border rounded-lg p-6 text-center">
           <div className="text-3xl font-bold text-primary mb-1">{courses.length}</div>
           <div className="text-sm text-muted-foreground">Courses</div>
@@ -146,10 +146,10 @@ export default function CoursesPage() {
           </div>
           <div className="text-sm text-muted-foreground">Content</div>
         </div>
-      </div>
+      </section>
 
       {/* Courses by Level */}
-      <div className="space-y-12">
+      <section className="space-y-12" aria-label="Courses by Level">
         {["Beginner", "Intermediate", "Advanced"].map((level) => {
           const levelCourses = courses.filter((course) => course.level === level);
           if (levelCourses.length === 0) return null;
@@ -171,9 +171,12 @@ export default function CoursesPage() {
 
               <div className="grid md:grid-cols-2 gap-6">
                 {levelCourses.map((course) => (
-                  <div
+                  <article
                     key={course.id}
                     className="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-all cursor-pointer group"
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`Enroll in ${course.title} - ${course.level} level course`}
                   >
                     <div className="flex items-start justify-between mb-3">
                       <h3 className="text-xl font-semibold group-hover:text-primary transition-colors flex-1">
@@ -202,6 +205,7 @@ export default function CoursesPage() {
                           strokeWidth="2"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
+                          aria-hidden="true"
                         >
                           <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -216,6 +220,7 @@ export default function CoursesPage() {
                           strokeWidth="2"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
+                          aria-hidden="true"
                         >
                           <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
@@ -230,6 +235,7 @@ export default function CoursesPage() {
                           strokeWidth="2"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
+                          aria-hidden="true"
                         >
                           <path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
@@ -240,17 +246,17 @@ export default function CoursesPage() {
                     <button className="w-full bg-primary text-primary-foreground rounded-lg py-2 text-sm font-medium hover:bg-primary/90 transition-colors">
                       Start Course
                     </button>
-                  </div>
+                  </article>
                 ))}
               </div>
             </div>
           );
         })}
-      </div>
+      </section>
 
       {/* CTA */}
-      <div className="mt-16 text-center bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 rounded-2xl p-12">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">
+      <section className="mt-16 text-center bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 rounded-2xl p-12" aria-labelledby="courses-cta-heading">
+        <h2 id="courses-cta-heading" className="text-2xl md:text-3xl font-bold mb-4">
           Not Sure Where to Start?
         </h2>
         <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
@@ -262,7 +268,7 @@ export default function CoursesPage() {
         >
           Get Course Recommendations
         </a>
-      </div>
+      </section>
     </div>
   );
 }

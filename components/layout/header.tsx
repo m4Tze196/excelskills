@@ -8,8 +8,8 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="flex items-center space-x-2">
+      <nav className="container mx-auto flex h-16 items-center justify-between px-4" aria-label="Hauptnavigation">
+        <Link href="/" className="flex items-center space-x-2" aria-label="ExcelSkills Startseite">
           <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             ExcelSkills
           </span>
@@ -47,7 +47,9 @@ export function Header() {
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="md:hidden p-2"
-          aria-label="Toggle menu"
+          aria-label="Menü öffnen/schließen"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-menu"
         >
           <svg
             className="h-6 w-6"
@@ -57,6 +59,7 @@ export function Header() {
             strokeWidth="2"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            aria-hidden="true"
           >
             {mobileMenuOpen ? (
               <path d="M6 18L18 6M6 6l12 12" />
@@ -69,7 +72,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-border/40 bg-background">
+        <nav id="mobile-menu" className="md:hidden border-t border-border/40 bg-background" aria-label="Mobile Navigation">
           <div className="container mx-auto py-4 px-4 flex flex-col space-y-3">
             <Link
               href="/skills"
@@ -100,7 +103,7 @@ export function Header() {
               Get Started
             </Link>
           </div>
-        </div>
+        </nav>
       )}
     </header>
   );

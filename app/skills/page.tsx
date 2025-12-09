@@ -123,17 +123,17 @@ export default function SkillsPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       {/* Header */}
-      <div className="max-w-3xl mb-12">
+      <header className="max-w-3xl mb-12">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
           Excel Skills Directory
         </h1>
         <p className="text-xl text-muted-foreground">
           Browse our comprehensive collection of Excel skills. From beginner fundamentals to advanced techniques.
         </p>
-      </div>
+      </header>
 
       {/* Filters - Placeholder for future interactivity */}
-      <div className="mb-8 space-y-4">
+      <section className="mb-8 space-y-4" aria-label="Filter Skills">
         <div>
           <h3 className="text-sm font-semibold mb-2">Category</h3>
           <div className="flex flex-wrap gap-2">
@@ -145,6 +145,8 @@ export default function SkillsPage() {
                     ? "bg-primary text-primary-foreground border-primary"
                     : "bg-background text-foreground border-border hover:bg-muted"
                 }`}
+                aria-pressed={category === "All"}
+                aria-label={`Filter by ${category} category`}
               >
                 {category}
               </button>
@@ -163,20 +165,25 @@ export default function SkillsPage() {
                     ? "bg-primary text-primary-foreground border-primary"
                     : "bg-background text-foreground border-border hover:bg-muted"
                 }`}
+                aria-pressed={difficulty === "All"}
+                aria-label={`Filter by ${difficulty} difficulty`}
               >
                 {difficulty}
               </button>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Skills Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" aria-label="Skills List">
         {skills.map((skill) => (
-          <div
+          <article
             key={skill.id}
             className="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow cursor-pointer group"
+            tabIndex={0}
+            role="button"
+            aria-label={`Learn about ${skill.title} - ${skill.difficulty} level`}
           >
             <div className="flex items-start justify-between mb-3">
               <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
@@ -207,18 +214,19 @@ export default function SkillsPage() {
                   strokeWidth="2"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  aria-hidden="true"
                 >
                   <path d="M9 5l7 7-7 7" />
                 </svg>
               </span>
             </div>
-          </div>
+          </article>
         ))}
-      </div>
+      </section>
 
       {/* CTA */}
-      <div className="mt-16 text-center bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 rounded-2xl p-12">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">
+      <section className="mt-16 text-center bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 rounded-2xl p-12" aria-labelledby="skills-cta-heading">
+        <h2 id="skills-cta-heading" className="text-2xl md:text-3xl font-bold mb-4">
           Need Help with a Specific Skill?
         </h2>
         <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
@@ -230,7 +238,7 @@ export default function SkillsPage() {
         >
           Ask AI Assistant
         </a>
-      </div>
+      </section>
     </div>
   );
 }

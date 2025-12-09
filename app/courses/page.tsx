@@ -1,8 +1,32 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Excel Courses - ExcelSkills",
-  description: "Learn Excel with our structured courses from beginner to advanced levels.",
+  title: "Excel Kurse - Excel lernen von Anfänger bis Fortgeschritten | ExcelSkills",
+  description: "Excel lernen mit strukturierten Kursen für alle Levels. Excel Tutorials für Anfänger, Fortgeschrittene und Profis. Formeln, Pivot-Tabellen, VBA und mehr. Jetzt kostenlos starten!",
+  keywords: ["Excel Kurse", "Excel lernen", "Excel Tutorials", "Excel Kurs Anfänger", "Excel Training", "Excel Formeln Kurs", "Pivot-Tabellen lernen", "VBA Kurs", "Power Query Tutorial", "Excel für Fortgeschrittene"],
+  openGraph: {
+    title: "Excel Kurse - Von Anfänger bis Fortgeschritten",
+    description: "Strukturierte Excel-Kurse für alle Skill-Level. Lernen Sie Excel mit hands-on Übungen und praktischen Beispielen.",
+    url: "https://excelskills.com/courses",
+    type: "website",
+    images: [
+      {
+        url: "/og-image-courses.jpg",
+        width: 1200,
+        height: 630,
+        alt: "ExcelSkills Kurse - Excel lernen",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Excel Kurse - Excel lernen | ExcelSkills",
+    description: "Strukturierte Excel-Kurse von Anfänger bis Fortgeschritten mit praktischen Übungen.",
+    images: ["/og-image-courses.jpg"],
+  },
+  alternates: {
+    canonical: "https://excelskills.com/courses",
+  },
 };
 
 type Course = {

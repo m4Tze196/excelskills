@@ -1,8 +1,32 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Excel Skills Directory - ExcelSkills",
-  description: "Browse our comprehensive Excel skills directory covering formulas, functions, data analysis, and more.",
+  title: "Excel Skills Verzeichnis - Alle Excel Funktionen & Tutorials | ExcelSkills",
+  description: "Umfassendes Excel Skills Verzeichnis mit Formeln, Funktionen, Datenanalyse und mehr. Excel lernen von VLOOKUP bis Pivot-Tabellen. Für Anfänger bis Experten. Jetzt Excel Skills entdecken!",
+  keywords: ["Excel Skills", "Excel lernen", "Excel Tutorials", "VLOOKUP", "Pivot-Tabellen", "Excel Formeln", "INDEX MATCH", "Excel Funktionen", "Datenanalyse", "Power Query", "Excel Makros"],
+  openGraph: {
+    title: "Excel Skills Verzeichnis - Alle Excel Funktionen",
+    description: "Durchsuchen Sie unser umfassendes Excel Skills Verzeichnis. Von Grundlagen bis zu fortgeschrittenen Techniken.",
+    url: "https://excelskills.com/skills",
+    type: "website",
+    images: [
+      {
+        url: "/og-image-skills.jpg",
+        width: 1200,
+        height: 630,
+        alt: "ExcelSkills Verzeichnis - Excel Skills lernen",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Excel Skills Verzeichnis | ExcelSkills",
+    description: "Umfassendes Verzeichnis aller Excel Skills - von Formeln bis Makros.",
+    images: ["/og-image-skills.jpg"],
+  },
+  alternates: {
+    canonical: "https://excelskills.com/skills",
+  },
 };
 
 type Skill = {

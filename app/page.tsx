@@ -1,4 +1,34 @@
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ExcelSkills - Excel lernen mit KI | Excel Tutorials & Kurse",
+  description: "Excel lernen leicht gemacht! Umfassende Excel Skills, interaktive Tutorials und KI-gestützter Chatbot. Von Grundlagen bis zu fortgeschrittenen Excel-Techniken. Starten Sie jetzt kostenlos!",
+  keywords: ["Excel lernen", "Excel Skills", "Excel Tutorials", "Excel Kurs kostenlos", "Excel Training", "Excel für Anfänger", "Excel Formeln lernen", "Pivot-Tabellen", "Datenanalyse Excel"],
+  openGraph: {
+    title: "ExcelSkills - Excel lernen mit KI-gestützter Anleitung",
+    description: "Excel lernen leicht gemacht! Umfassende Skills-Bibliothek, interaktive Kurse und KI-Chatbot für sofortige Hilfe.",
+    url: "https://excelskills.com",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "ExcelSkills Homepage - Excel lernen",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ExcelSkills - Excel lernen mit KI",
+    description: "Excel lernen mit umfassenden Tutorials, Kursen und KI-Chatbot-Unterstützung.",
+    images: ["/og-image.jpg"],
+  },
+  alternates: {
+    canonical: "https://excelskills.com",
+  },
+};
 
 export default function Home() {
   return (

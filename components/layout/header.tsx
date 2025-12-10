@@ -3,10 +3,13 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useTheme } from "@/lib/theme-context";
+import { useI18n, Language, languageNames } from "@/lib/i18n-context";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { language, setLanguage, t } = useI18n();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -23,26 +26,72 @@ export function Header() {
             href="/skills"
             className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
           >
-            Skills
+            {t("header.skills")}
           </Link>
           <Link
             href="/courses"
             className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
           >
-            Courses
+            {t("header.courses")}
           </Link>
           <Link
             href="/chat"
             className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
           >
-            AI Assistant
+            {t("header.aiAssistant")}
           </Link>
           <Link
             href="/chat"
             className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
           >
-            Get Started
+            {t("header.getStarted")}
           </Link>
+
+          {/* Language Selector */}
+          <div className="relative">
+            <button
+              onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
+              className="p-2 rounded-lg hover:bg-muted transition-colors flex items-center space-x-1"
+              aria-label="Select language"
+            >
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+              </svg>
+              <span className="text-xs font-medium">{language.toUpperCase()}</span>
+            </button>
+            {languageMenuOpen && (
+              <>
+                <div
+                  className="fixed inset-0 z-10"
+                  onClick={() => setLanguageMenuOpen(false)}
+                />
+                <div className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-lg shadow-lg py-1 z-20">
+                  {(Object.keys(languageNames) as Language[]).map((lang) => (
+                    <button
+                      key={lang}
+                      onClick={() => {
+                        setLanguage(lang);
+                        setLanguageMenuOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-2 text-sm hover:bg-muted transition-colors ${
+                        language === lang ? "bg-muted font-medium" : ""
+                      }`}
+                    >
+                      {languageNames[lang]}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
 
           {/* Dark Mode Toggle */}
           <button
@@ -80,6 +129,51 @@ export function Header() {
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center space-x-2">
+          {/* Language Selector for Mobile */}
+          <div className="relative">
+            <button
+              onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
+              className="p-2 rounded-lg hover:bg-muted transition-colors flex items-center"
+              aria-label="Select language"
+            >
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+              </svg>
+            </button>
+            {languageMenuOpen && (
+              <>
+                <div
+                  className="fixed inset-0 z-10"
+                  onClick={() => setLanguageMenuOpen(false)}
+                />
+                <div className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-lg shadow-lg py-1 z-20">
+                  {(Object.keys(languageNames) as Language[]).map((lang) => (
+                    <button
+                      key={lang}
+                      onClick={() => {
+                        setLanguage(lang);
+                        setLanguageMenuOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-2 text-sm hover:bg-muted transition-colors ${
+                        language === lang ? "bg-muted font-medium" : ""
+                      }`}
+                    >
+                      {languageNames[lang]}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+
           {/* Dark Mode Toggle for Mobile */}
           <button
             onClick={toggleTheme}
@@ -146,28 +240,28 @@ export function Header() {
               className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors py-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Skills
+              {t("header.skills")}
             </Link>
             <Link
               href="/courses"
               className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors py-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Courses
+              {t("header.courses")}
             </Link>
             <Link
               href="/chat"
               className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors py-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              AI Assistant
+              {t("header.aiAssistant")}
             </Link>
             <Link
               href="/chat"
               className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Get Started
+              {t("header.getStarted")}
             </Link>
           </div>
         </div>

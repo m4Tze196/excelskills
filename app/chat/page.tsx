@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useI18n } from "@/lib/i18n-context";
 
 type Message = {
   id: string;
@@ -10,11 +11,12 @@ type Message = {
 };
 
 export default function ChatPage() {
+  const { t } = useI18n();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
       role: "assistant",
-      content: "Hello! I'm your Excel AI assistant. Ask me anything about Excel formulas, functions, data analysis, or best practices. How can I help you today?",
+      content: t("chat.greeting"),
       timestamp: new Date(),
     },
   ]);
@@ -61,10 +63,10 @@ export default function ChatPage() {
         {/* Header */}
         <div className="mb-6">
           <h1 className="text-3xl md:text-4xl font-bold mb-2">
-            Excel AI Assistant
+            {t("chat.title")}
           </h1>
           <p className="text-muted-foreground">
-            Ask questions, get formulas, learn techniques, and solve Excel problems instantly.
+            {t("chat.subtitle")}
           </p>
         </div>
 
@@ -157,7 +159,7 @@ export default function ChatPage() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Ask me anything about Excel..."
+                placeholder={t("chat.placeholder")}
                 className="flex-1 resize-none rounded-lg border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 rows={1}
               />
@@ -166,11 +168,11 @@ export default function ChatPage() {
                 disabled={!input.trim() || isTyping}
                 className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm"
               >
-                Send
+                {t("chat.send")}
               </button>
             </div>
             <p className="text-xs text-muted-foreground mt-2">
-              Press Enter to send, Shift+Enter for new line
+              {t("chat.inputHint")}
             </p>
           </div>
         </div>
@@ -190,9 +192,9 @@ export default function ChatPage() {
               <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <div>
-              <p className="text-sm font-medium">Placeholder Mode</p>
+              <p className="text-sm font-medium">{t("chat.placeholderTitle")}</p>
               <p className="text-xs text-muted-foreground mt-1">
-                This is a UI preview. Full AI functionality with backend integration and payment system will be implemented in the next phase.
+                {t("chat.placeholderDescription")}
               </p>
             </div>
           </div>

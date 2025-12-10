@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { useI18n } from "@/lib/i18n-context";
 
 export default function Home() {
+  const { t } = useI18n();
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -8,14 +13,14 @@ export default function Home() {
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <div className="space-y-4">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-              Master Excel with{" "}
+              {t("home.hero.title")}{" "}
               <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                AI-Powered
+                {t("home.hero.aiPowered")}
               </span>{" "}
-              Guidance
+              {t("home.hero.guidance")}
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive skills directory, interactive courses, and an intelligent chatbot to help you excel at Excel.
+              {t("home.hero.subtitle")}
             </p>
           </div>
 
@@ -24,13 +29,13 @@ export default function Home() {
               href="/chat"
               className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-base font-medium text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg"
             >
-              Try AI Assistant
+              {t("home.hero.tryAI")}
             </Link>
             <Link
               href="/skills"
               className="inline-flex items-center justify-center rounded-lg border border-border bg-background px-8 py-3 text-base font-medium hover:bg-muted transition-colors"
             >
-              Browse Skills
+              {t("home.hero.browseSkills")}
             </Link>
           </div>
         </div>
@@ -40,7 +45,7 @@ export default function Home() {
       <section className="container mx-auto px-4 py-20 border-t border-border/40">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Everything You Need to Master Excel
+            {t("home.features.title")}
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -59,15 +64,15 @@ export default function Home() {
                   <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Skills Directory</h3>
+              <h3 className="text-xl font-semibold mb-2">{t("home.features.skills.title")}</h3>
               <p className="text-muted-foreground mb-4">
-                Comprehensive catalog of Excel skills from beginner to advanced, organized by category and difficulty.
+                {t("home.features.skills.description")}
               </p>
               <Link
                 href="/skills"
                 className="text-primary hover:text-primary/80 font-medium text-sm inline-flex items-center"
               >
-                Explore Skills
+                {t("home.features.skills.link")}
                 <svg
                   className="w-4 h-4 ml-1"
                   fill="none"
@@ -97,15 +102,15 @@ export default function Home() {
                   <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Interactive Courses</h3>
+              <h3 className="text-xl font-semibold mb-2">{t("home.features.courses.title")}</h3>
               <p className="text-muted-foreground mb-4">
-                Step-by-step courses designed to build your Excel expertise with hands-on practice and real-world examples.
+                {t("home.features.courses.description")}
               </p>
               <Link
                 href="/courses"
                 className="text-secondary hover:text-secondary/80 font-medium text-sm inline-flex items-center"
               >
-                View Courses
+                {t("home.features.courses.link")}
                 <svg
                   className="w-4 h-4 ml-1"
                   fill="none"
@@ -135,15 +140,15 @@ export default function Home() {
                   <path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">AI Assistant</h3>
+              <h3 className="text-xl font-semibold mb-2">{t("home.features.ai.title")}</h3>
               <p className="text-muted-foreground mb-4">
-                Get instant answers to your Excel questions with our intelligent chatbot powered by advanced AI.
+                {t("home.features.ai.description")}
               </p>
               <Link
                 href="/chat"
                 className="text-accent hover:text-accent/80 font-medium text-sm inline-flex items-center"
               >
-                Start Chatting
+                {t("home.features.ai.link")}
                 <svg
                   className="w-4 h-4 ml-1"
                   fill="none"
@@ -165,16 +170,16 @@ export default function Home() {
       <section className="container mx-auto px-4 py-20 border-t border-border/40">
         <div className="max-w-4xl mx-auto bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 rounded-2xl p-12 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Level Up Your Excel Skills?
+            {t("home.cta.title")}
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join thousands of professionals mastering Excel with our comprehensive platform.
+            {t("home.cta.subtitle")}
           </p>
           <Link
             href="/chat"
             className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-base font-medium text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg"
           >
-            Get Started for Free
+            {t("home.cta.button")}
           </Link>
         </div>
       </section>

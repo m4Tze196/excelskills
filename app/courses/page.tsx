@@ -1,9 +1,6 @@
-import { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Excel Courses - ExcelSkills",
-  description: "Learn Excel with our structured courses from beginner to advanced levels.",
-};
+import { useI18n } from "@/lib/i18n-context";
 
 type Course = {
   id: string;
@@ -86,15 +83,17 @@ function getLevelColor(level: string) {
 }
 
 export default function CoursesPage() {
+  const { t } = useI18n();
+
   return (
     <div className="container mx-auto px-4 py-12">
       {/* Header */}
       <div className="max-w-3xl mb-12">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          Excel Courses
+          {t("courses.title")}
         </h1>
         <p className="text-xl text-muted-foreground">
-          Structured learning paths to take you from Excel novice to expert. Learn at your own pace with hands-on practice.
+          {t("courses.subtitle")}
         </p>
       </div>
 
@@ -102,25 +101,25 @@ export default function CoursesPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
         <div className="bg-card border border-border rounded-lg p-6 text-center">
           <div className="text-3xl font-bold text-primary mb-1">{courses.length}</div>
-          <div className="text-sm text-muted-foreground">Courses</div>
+          <div className="text-sm text-muted-foreground">{t("courses.stats.courses")}</div>
         </div>
         <div className="bg-card border border-border rounded-lg p-6 text-center">
           <div className="text-3xl font-bold text-secondary mb-1">
             {courses.reduce((acc, course) => acc + course.lessons, 0)}
           </div>
-          <div className="text-sm text-muted-foreground">Lessons</div>
+          <div className="text-sm text-muted-foreground">{t("courses.stats.lessons")}</div>
         </div>
         <div className="bg-card border border-border rounded-lg p-6 text-center">
           <div className="text-3xl font-bold text-accent mb-1">
             {courses.reduce((acc, course) => acc + course.students, 0).toLocaleString()}
           </div>
-          <div className="text-sm text-muted-foreground">Students</div>
+          <div className="text-sm text-muted-foreground">{t("courses.stats.students")}</div>
         </div>
         <div className="bg-card border border-border rounded-lg p-6 text-center">
           <div className="text-3xl font-bold text-primary mb-1">
             {courses.reduce((acc, course) => acc + parseInt(course.duration), 0)}h
           </div>
-          <div className="text-sm text-muted-foreground">Content</div>
+          <div className="text-sm text-muted-foreground">{t("courses.stats.content")}</div>
         </div>
       </div>
 
@@ -142,7 +141,7 @@ export default function CoursesPage() {
                       : "bg-destructive"
                   }`}
                 ></span>
-                {level} Level
+                {t(`courses.level.${level.toLowerCase()}`)} {t("courses.level.title")}
               </h2>
 
               <div className="grid md:grid-cols-2 gap-6">
@@ -160,7 +159,7 @@ export default function CoursesPage() {
                           course.level
                         )}`}
                       >
-                        {course.level}
+                        {t(`courses.level.${course.level.toLowerCase()}`)}
                       </span>
                     </div>
 
@@ -195,7 +194,7 @@ export default function CoursesPage() {
                         >
                           <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
-                        {course.lessons} lessons
+                        {course.lessons} {t("courses.lessons")}
                       </div>
                       <div className="flex items-center text-muted-foreground">
                         <svg
@@ -214,7 +213,7 @@ export default function CoursesPage() {
                     </div>
 
                     <button className="w-full bg-primary text-primary-foreground rounded-lg py-2 text-sm font-medium hover:bg-primary/90 transition-colors">
-                      Start Course
+                      {t("courses.startCourse")}
                     </button>
                   </div>
                 ))}
@@ -227,16 +226,16 @@ export default function CoursesPage() {
       {/* CTA */}
       <div className="mt-16 text-center bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 rounded-2xl p-12">
         <h2 className="text-2xl md:text-3xl font-bold mb-4">
-          Not Sure Where to Start?
+          {t("courses.cta.title")}
         </h2>
         <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-          Our AI assistant can help you choose the right course based on your current skill level and learning goals.
+          {t("courses.cta.subtitle")}
         </p>
         <a
           href="/chat"
           className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-base font-medium text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg"
         >
-          Get Course Recommendations
+          {t("courses.cta.button")}
         </a>
       </div>
     </div>

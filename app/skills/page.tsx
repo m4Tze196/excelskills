@@ -1,9 +1,6 @@
-import { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Excel Skills Directory - ExcelSkills",
-  description: "Browse our comprehensive Excel skills directory covering formulas, functions, data analysis, and more.",
-};
+import { useI18n } from "@/lib/i18n-context";
 
 type Skill = {
   id: string;
@@ -79,9 +76,6 @@ const skills: Skill[] = [
   },
 ];
 
-const categories = ["All", "Formulas", "Data Analysis", "Formatting", "Visualization", "Data Management", "Automation"];
-const difficulties = ["All", "Beginner", "Intermediate", "Advanced"];
-
 function getDifficultyColor(difficulty: string) {
   switch (difficulty) {
     case "Beginner":
@@ -96,28 +90,33 @@ function getDifficultyColor(difficulty: string) {
 }
 
 export default function SkillsPage() {
+  const { t } = useI18n();
+
+  const categories = [t("skills.all"), t("category.formulas"), t("category.dataAnalysis"), t("category.formatting"), t("category.visualization"), t("category.dataManagement"), t("category.automation")];
+  const difficulties = [t("skills.all"), t("skills.beginner"), t("skills.intermediate"), t("skills.advanced")];
+
   return (
     <div className="container mx-auto px-4 py-12">
       {/* Header */}
       <div className="max-w-3xl mb-12">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          Excel Skills Directory
+          {t("skills.title")}
         </h1>
         <p className="text-xl text-muted-foreground">
-          Browse our comprehensive collection of Excel skills. From beginner fundamentals to advanced techniques.
+          {t("skills.subtitle")}
         </p>
       </div>
 
       {/* Filters - Placeholder for future interactivity */}
       <div className="mb-8 space-y-4">
         <div>
-          <h3 className="text-sm font-semibold mb-2">Category</h3>
+          <h3 className="text-sm font-semibold mb-2">{t("skills.category")}</h3>
           <div className="flex flex-wrap gap-2">
-            {categories.map((category) => (
+            {categories.map((category, index) => (
               <button
                 key={category}
                 className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
-                  category === "All"
+                  index === 0
                     ? "bg-primary text-primary-foreground border-primary"
                     : "bg-background text-foreground border-border hover:bg-muted"
                 }`}
@@ -129,13 +128,13 @@ export default function SkillsPage() {
         </div>
 
         <div>
-          <h3 className="text-sm font-semibold mb-2">Difficulty</h3>
+          <h3 className="text-sm font-semibold mb-2">{t("skills.difficulty")}</h3>
           <div className="flex flex-wrap gap-2">
-            {difficulties.map((difficulty) => (
+            {difficulties.map((difficulty, index) => (
               <button
                 key={difficulty}
                 className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
-                  difficulty === "All"
+                  index === 0
                     ? "bg-primary text-primary-foreground border-primary"
                     : "bg-background text-foreground border-border hover:bg-muted"
                 }`}
@@ -163,7 +162,7 @@ export default function SkillsPage() {
                   skill.difficulty
                 )}`}
               >
-                {skill.difficulty}
+                {t(`skills.${skill.difficulty.toLowerCase()}`)}
               </span>
             </div>
             <p className="text-muted-foreground mb-4 text-sm">
@@ -171,10 +170,10 @@ export default function SkillsPage() {
             </p>
             <div className="flex items-center justify-between">
               <span className="text-xs font-medium text-muted-foreground bg-muted px-3 py-1 rounded-full">
-                {skill.category}
+                {t(`category.${skill.category.toLowerCase().replace(/ /g, "")}`)}
               </span>
               <span className="text-primary text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
-                Learn More
+                {t("skills.learnMore")}
                 <svg
                   className="w-4 h-4 ml-1"
                   fill="none"
@@ -195,16 +194,16 @@ export default function SkillsPage() {
       {/* CTA */}
       <div className="mt-16 text-center bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 rounded-2xl p-12">
         <h2 className="text-2xl md:text-3xl font-bold mb-4">
-          Need Help with a Specific Skill?
+          {t("skills.cta.title")}
         </h2>
         <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-          Ask our AI assistant for personalized guidance and instant answers to your Excel questions.
+          {t("skills.cta.subtitle")}
         </p>
         <a
           href="/chat"
           className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-base font-medium text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg"
         >
-          Ask AI Assistant
+          {t("skills.cta.button")}
         </a>
       </div>
     </div>

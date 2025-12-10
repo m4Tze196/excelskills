@@ -1,0 +1,184 @@
+{
+  "header": {
+    "brand": "ExcelSkills",
+    "skills": "Skills",
+    "courses": "Courses",
+    "aiAssistant": "AI Assistant",
+    "getStarted": "Get Started"
+  },
+  "footer": {
+    "description": "Master Excel with AI-powered guidance and comprehensive skill directory.",
+    "skills": "Skills",
+    "browseAllSkills": "Browse All Skills",
+    "formulas": "Formulas",
+    "pivotTables": "Pivot Tables",
+    "dataAnalysis": "Data Analysis",
+    "courses": "Courses",
+    "allCourses": "All Courses",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "resources": "Resources",
+    "aiAssistant": "AI Assistant",
+    "about": "About",
+    "contact": "Contact",
+    "allRightsReserved": "All rights reserved.",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  },
+  "home": {
+    "hero": {
+      "title": "Master Excel with",
+      "titleHighlight": "AI-Powered",
+      "titleEnd": "Guidance",
+      "description": "Comprehensive skills directory, interactive courses, and an intelligent chatbot to help you excel at Excel.",
+      "tryAI": "Try AI Assistant",
+      "browseSkills": "Browse Skills"
+    },
+    "features": {
+      "title": "Everything You Need to Master Excel",
+      "skillsDirectory": {
+        "title": "Skills Directory",
+        "description": "Comprehensive catalog of Excel skills from beginner to advanced, organized by category and difficulty.",
+        "cta": "Explore Skills"
+      },
+      "courses": {
+        "title": "Interactive Courses",
+        "description": "Step-by-step courses designed to build your Excel expertise with hands-on practice and real-world examples.",
+        "cta": "View Courses"
+      },
+      "aiAssistant": {
+        "title": "AI Assistant",
+        "description": "Get instant answers to your Excel questions with our intelligent chatbot powered by advanced AI.",
+        "cta": "Start Chatting"
+      }
+    },
+    "cta": {
+      "title": "Ready to Level Up Your Excel Skills?",
+      "description": "Join thousands of professionals mastering Excel with our comprehensive platform.",
+      "button": "Get Started for Free"
+    }
+  },
+  "skills": {
+    "title": "Excel Skills Directory",
+    "description": "Browse our comprehensive collection of Excel skills. From beginner fundamentals to advanced techniques.",
+    "category": "Category",
+    "difficulty": "Difficulty",
+    "all": "All",
+    "learnMore": "Learn More",
+    "cta": {
+      "title": "Need Help with a Specific Skill?",
+      "description": "Ask our AI assistant for personalized guidance and instant answers to your Excel questions.",
+      "button": "Ask AI Assistant"
+    },
+    "items": {
+      "vlookup": {
+        "title": "VLOOKUP",
+        "description": "Search for a value in the first column of a range and return a value in the same row from another column."
+      },
+      "pivotTables": {
+        "title": "Pivot Tables",
+        "description": "Create dynamic summary tables to analyze and explore your data interactively."
+      },
+      "conditionalFormatting": {
+        "title": "Conditional Formatting",
+        "description": "Apply formatting to cells based on their values to highlight important information."
+      },
+      "indexMatch": {
+        "title": "INDEX-MATCH",
+        "description": "A more flexible alternative to VLOOKUP for looking up values in any direction."
+      },
+      "powerQuery": {
+        "title": "Power Query",
+        "description": "Connect to, combine, and refine data from multiple sources."
+      },
+      "charts": {
+        "title": "Charts & Graphs",
+        "description": "Visualize your data with various chart types for better insights."
+      },
+      "sumif": {
+        "title": "SUMIF & SUMIFS",
+        "description": "Sum values based on one or multiple criteria."
+      },
+      "dataValidation": {
+        "title": "Data Validation",
+        "description": "Control what data can be entered into cells to maintain data quality."
+      },
+      "macros": {
+        "title": "Macros & VBA",
+        "description": "Automate repetitive tasks with recorded macros and VBA programming."
+      }
+    },
+    "categories": {
+      "formulas": "Formulas",
+      "dataAnalysis": "Data Analysis",
+      "formatting": "Formatting",
+      "visualization": "Visualization",
+      "dataManagement": "Data Management",
+      "automation": "Automation"
+    },
+    "levels": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    }
+  },
+  "courses": {
+    "title": "Excel Courses",
+    "description": "Structured learning paths to take you from Excel novice to expert. Learn at your own pace with hands-on practice.",
+    "stats": {
+      "courses": "Courses",
+      "lessons": "Lessons",
+      "students": "Students",
+      "content": "Content"
+    },
+    "startCourse": "Start Course",
+    "cta": {
+      "title": "Not Sure Where to Start?",
+      "description": "Our AI assistant can help you choose the right course based on your current skill level and learning goals.",
+      "button": "Get Course Recommendations"
+    },
+    "items": {
+      "fundamentals": {
+        "title": "Excel Fundamentals",
+        "description": "Start your Excel journey with the basics. Learn navigation, data entry, simple formulas, and formatting."
+      },
+      "formulas": {
+        "title": "Mastering Formulas & Functions",
+        "description": "Deep dive into Excel formulas including VLOOKUP, INDEX-MATCH, SUMIF, and more advanced functions."
+      },
+      "dataAnalysis": {
+        "title": "Data Analysis with Excel",
+        "description": "Learn to analyze data with pivot tables, charts, conditional formatting, and statistical functions."
+      },
+      "powerQuery": {
+        "title": "Power Query & Power Pivot",
+        "description": "Transform and model your data with Power Query and Power Pivot for advanced analytics."
+      },
+      "dashboard": {
+        "title": "Dashboard & Reporting",
+        "description": "Create professional dashboards and reports with advanced charting and visualization techniques."
+      },
+      "vba": {
+        "title": "VBA & Automation",
+        "description": "Automate repetitive tasks and create custom solutions with VBA programming."
+      }
+    },
+    "duration": {
+      "hours": "hours"
+    }
+  },
+  "chat": {
+    "title": "Excel AI Assistant",
+    "description": "Ask questions, get formulas, learn techniques, and solve Excel problems instantly.",
+    "placeholder": "Ask me anything about Excel...",
+    "send": "Send",
+    "keyboardHint": "Press Enter to send, Shift+Enter for new line",
+    "greeting": "Hello! I'm your Excel AI assistant. Ask me anything about Excel formulas, functions, data analysis, or best practices. How can I help you today?",
+    "placeholderResponse": "This is a placeholder response. The AI chatbot backend with payment integration will be implemented in the next phase. For now, you can explore the UI and see how the chat interface works.",
+    "banner": {
+      "title": "Placeholder Mode",
+      "description": "This is a UI preview. Full AI functionality with backend integration and payment system will be implemented in the next phase."
+    }
+  }
+}

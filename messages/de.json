@@ -1,0 +1,184 @@
+{
+  "header": {
+    "brand": "ExcelSkills",
+    "skills": "Skills",
+    "courses": "Kurse",
+    "aiAssistant": "KI-Assistent",
+    "getStarted": "Jetzt starten"
+  },
+  "footer": {
+    "description": "Meistern Sie Excel mit KI-gestützter Anleitung und umfassendem Kompetenzverzeichnis.",
+    "skills": "Skills",
+    "browseAllSkills": "Alle Skills durchsuchen",
+    "formulas": "Formeln",
+    "pivotTables": "Pivot-Tabellen",
+    "dataAnalysis": "Datenanalyse",
+    "courses": "Kurse",
+    "allCourses": "Alle Kurse",
+    "beginner": "Anfänger",
+    "intermediate": "Fortgeschritten",
+    "advanced": "Experte",
+    "resources": "Ressourcen",
+    "aiAssistant": "KI-Assistent",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "allRightsReserved": "Alle Rechte vorbehalten.",
+    "privacy": "Datenschutz",
+    "terms": "AGB"
+  },
+  "home": {
+    "hero": {
+      "title": "Excel meistern mit",
+      "titleHighlight": "KI-gestützter",
+      "titleEnd": "Anleitung",
+      "description": "Umfassendes Kompetenzverzeichnis, interaktive Kurse und ein intelligenter Chatbot, um Sie in Excel zu unterstützen.",
+      "tryAI": "KI-Assistent testen",
+      "browseSkills": "Skills durchsuchen"
+    },
+    "features": {
+      "title": "Alles, was Sie zum Meistern von Excel brauchen",
+      "skillsDirectory": {
+        "title": "Skills-Verzeichnis",
+        "description": "Umfassender Katalog von Excel-Kompetenzen von Anfänger bis Fortgeschritten, organisiert nach Kategorie und Schwierigkeit.",
+        "cta": "Skills erkunden"
+      },
+      "courses": {
+        "title": "Interaktive Kurse",
+        "description": "Schritt-für-Schritt-Kurse, um Ihre Excel-Expertise mit praktischen Übungen und realen Beispielen aufzubauen.",
+        "cta": "Kurse ansehen"
+      },
+      "aiAssistant": {
+        "title": "KI-Assistent",
+        "description": "Erhalten Sie sofortige Antworten auf Ihre Excel-Fragen mit unserem intelligenten, KI-gestützten Chatbot.",
+        "cta": "Chat starten"
+      }
+    },
+    "cta": {
+      "title": "Bereit, Ihre Excel-Skills zu verbessern?",
+      "description": "Schließen Sie sich Tausenden von Fachleuten an, die Excel mit unserer umfassenden Plattform meistern.",
+      "button": "Kostenlos starten"
+    }
+  },
+  "skills": {
+    "title": "Excel Skills-Verzeichnis",
+    "description": "Durchsuchen Sie unsere umfassende Sammlung von Excel-Skills. Von den Grundlagen für Anfänger bis zu fortgeschrittenen Techniken.",
+    "category": "Kategorie",
+    "difficulty": "Schwierigkeit",
+    "all": "Alle",
+    "learnMore": "Mehr erfahren",
+    "cta": {
+      "title": "Benötigen Sie Hilfe bei einem bestimmten Skill?",
+      "description": "Fragen Sie unseren KI-Assistenten für personalisierte Anleitung und sofortige Antworten auf Ihre Excel-Fragen.",
+      "button": "KI-Assistent fragen"
+    },
+    "items": {
+      "vlookup": {
+        "title": "SVERWEIS",
+        "description": "Suchen Sie nach einem Wert in der ersten Spalte eines Bereichs und geben Sie einen Wert in derselben Zeile aus einer anderen Spalte zurück."
+      },
+      "pivotTables": {
+        "title": "Pivot-Tabellen",
+        "description": "Erstellen Sie dynamische Zusammenfassungstabellen, um Ihre Daten interaktiv zu analysieren und zu erkunden."
+      },
+      "conditionalFormatting": {
+        "title": "Bedingte Formatierung",
+        "description": "Wenden Sie Formatierungen auf Zellen basierend auf ihren Werten an, um wichtige Informationen hervorzuheben."
+      },
+      "indexMatch": {
+        "title": "INDEX-VERGLEICH",
+        "description": "Eine flexiblere Alternative zu SVERWEIS zum Nachschlagen von Werten in jede Richtung."
+      },
+      "powerQuery": {
+        "title": "Power Query",
+        "description": "Verbinden, kombinieren und verfeinern Sie Daten aus mehreren Quellen."
+      },
+      "charts": {
+        "title": "Diagramme & Grafiken",
+        "description": "Visualisieren Sie Ihre Daten mit verschiedenen Diagrammtypen für bessere Einblicke."
+      },
+      "sumif": {
+        "title": "SUMMEWENN & SUMMEWENNS",
+        "description": "Summieren Sie Werte basierend auf einem oder mehreren Kriterien."
+      },
+      "dataValidation": {
+        "title": "Datenüberprüfung",
+        "description": "Kontrollieren Sie, welche Daten in Zellen eingegeben werden können, um die Datenqualität zu gewährleisten."
+      },
+      "macros": {
+        "title": "Makros & VBA",
+        "description": "Automatisieren Sie wiederkehrende Aufgaben mit aufgezeichneten Makros und VBA-Programmierung."
+      }
+    },
+    "categories": {
+      "formulas": "Formeln",
+      "dataAnalysis": "Datenanalyse",
+      "formatting": "Formatierung",
+      "visualization": "Visualisierung",
+      "dataManagement": "Datenverwaltung",
+      "automation": "Automatisierung"
+    },
+    "levels": {
+      "beginner": "Anfänger",
+      "intermediate": "Fortgeschritten",
+      "advanced": "Experte"
+    }
+  },
+  "courses": {
+    "title": "Excel-Kurse",
+    "description": "Strukturierte Lernpfade, um Sie vom Excel-Anfänger zum Experten zu machen. Lernen Sie in Ihrem eigenen Tempo mit praktischen Übungen.",
+    "stats": {
+      "courses": "Kurse",
+      "lessons": "Lektionen",
+      "students": "Teilnehmer",
+      "content": "Inhalt"
+    },
+    "startCourse": "Kurs starten",
+    "cta": {
+      "title": "Nicht sicher, wo Sie anfangen sollen?",
+      "description": "Unser KI-Assistent kann Ihnen helfen, den richtigen Kurs basierend auf Ihrem aktuellen Kenntnisstand und Ihren Lernzielen auszuwählen.",
+      "button": "Kursempfehlungen erhalten"
+    },
+    "items": {
+      "fundamentals": {
+        "title": "Excel Grundlagen",
+        "description": "Beginnen Sie Ihre Excel-Reise mit den Grundlagen. Lernen Sie Navigation, Dateneingabe, einfache Formeln und Formatierung."
+      },
+      "formulas": {
+        "title": "Formeln & Funktionen meistern",
+        "description": "Tauchen Sie tief in Excel-Formeln ein, einschließlich SVERWEIS, INDEX-VERGLEICH, SUMMEWENN und erweiterten Funktionen."
+      },
+      "dataAnalysis": {
+        "title": "Datenanalyse mit Excel",
+        "description": "Lernen Sie, Daten mit Pivot-Tabellen, Diagrammen, bedingter Formatierung und statistischen Funktionen zu analysieren."
+      },
+      "powerQuery": {
+        "title": "Power Query & Power Pivot",
+        "description": "Transformieren und modellieren Sie Ihre Daten mit Power Query und Power Pivot für erweiterte Analysen."
+      },
+      "dashboard": {
+        "title": "Dashboard & Reporting",
+        "description": "Erstellen Sie professionelle Dashboards und Berichte mit erweiterten Diagramm- und Visualisierungstechniken."
+      },
+      "vba": {
+        "title": "VBA & Automatisierung",
+        "description": "Automatisieren Sie wiederkehrende Aufgaben und erstellen Sie benutzerdefinierte Lösungen mit VBA-Programmierung."
+      }
+    },
+    "duration": {
+      "hours": "Stunden"
+    }
+  },
+  "chat": {
+    "title": "Excel KI-Assistent",
+    "description": "Stellen Sie Fragen, erhalten Sie Formeln, lernen Sie Techniken und lösen Sie Excel-Probleme sofort.",
+    "placeholder": "Fragen Sie mich alles über Excel...",
+    "send": "Senden",
+    "keyboardHint": "Enter zum Senden, Shift+Enter für neue Zeile",
+    "greeting": "Hallo! Ich bin Ihr Excel KI-Assistent. Fragen Sie mich alles über Excel-Formeln, Funktionen, Datenanalyse oder Best Practices. Wie kann ich Ihnen heute helfen?",
+    "placeholderResponse": "Dies ist eine Platzhalter-Antwort. Das KI-Chatbot-Backend mit Zahlungsintegration wird in der nächsten Phase implementiert. Im Moment können Sie die Benutzeroberfläche erkunden und sehen, wie die Chat-Schnittstelle funktioniert.",
+    "banner": {
+      "title": "Platzhalter-Modus",
+      "description": "Dies ist eine UI-Vorschau. Die vollständige KI-Funktionalität mit Backend-Integration und Zahlungssystem wird in der nächsten Phase implementiert."
+    }
+  }
+}

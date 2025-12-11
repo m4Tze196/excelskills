@@ -4,12 +4,6 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { useState } from "react";
 import {
-  ConditionalFormattingPreview,
-  VLookupPreview,
-  SumIfPreview,
-  PivotTablePreview,
-} from "@/components/animations";
-import {
   SkillPreviewCard,
   VLookupIcon,
   PivotTableIcon,
@@ -22,13 +16,10 @@ import {
   PowerQueryIcon,
 } from "@/components/animations/SkillPreviewCard";
 
-type FeaturedAnimation = "conditionalFormatting" | "vlookup" | "sumif" | "pivotTables";
-
 export default function SkillsPage() {
   const t = useTranslations("skills");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedLevel, setSelectedLevel] = useState<string>("all");
-  const [activeAnimation, setActiveAnimation] = useState<FeaturedAnimation>("conditionalFormatting");
 
   const skills = [
     {
@@ -96,37 +87,6 @@ export default function SkillsPage() {
     },
   ];
 
-  const featuredAnimations = [
-    {
-      id: "conditionalFormatting" as FeaturedAnimation,
-      title: "Bedingte Formatierung",
-      description: "Zellen automatisch färben basierend auf Werten",
-      component: <ConditionalFormattingPreview />,
-      icon: "🎨",
-    },
-    {
-      id: "vlookup" as FeaturedAnimation,
-      title: "SVERWEIS",
-      description: "Werte in Tabellen nachschlagen",
-      component: <VLookupPreview />,
-      icon: "🔍",
-    },
-    {
-      id: "sumif" as FeaturedAnimation,
-      title: "SUMMEWENN",
-      description: "Bedingte Summen berechnen",
-      component: <SumIfPreview />,
-      icon: "➕",
-    },
-    {
-      id: "pivotTables" as FeaturedAnimation,
-      title: "Pivot-Tabellen",
-      description: "Daten dynamisch zusammenfassen",
-      component: <PivotTablePreview />,
-      icon: "📊",
-    },
-  ];
-
   const categories = [
     "all",
     "formulas",
@@ -145,8 +105,6 @@ export default function SkillsPage() {
     return categoryMatch && levelMatch;
   });
 
-  const currentAnimation = featuredAnimations.find(anim => anim.id === activeAnimation);
-
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
@@ -158,65 +116,6 @@ export default function SkillsPage() {
           <p className="text-lg md:text-xl text-muted-foreground">
             {t("description")}
           </p>
-        </div>
-      </section>
-
-      {/* Featured: Interactive Animations */}
-      <section className="container mx-auto px-4 pb-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="bg-card rounded-2xl border-2 border-primary/20 shadow-xl overflow-hidden">
-            {/* Header with Tabs */}
-            <div className="bg-gradient-to-r from-primary/10 via-secondary/10 to-success/10 border-b border-border">
-              <div className="px-6 py-4">
-                <h2 className="text-2xl font-bold text-foreground mb-3">
-                  ✨ Interaktive Demos
-                </h2>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Erlebe Excel-Funktionen in Action - keine Videos, reine Web-Animationen
-                </p>
-
-                {/* Animation Tabs */}
-                <div className="flex flex-wrap gap-2">
-                  {featuredAnimations.map((anim) => (
-                    <button
-                      key={anim.id}
-                      onClick={() => setActiveAnimation(anim.id)}
-                      className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                        activeAnimation === anim.id
-                          ? "bg-primary text-primary-foreground shadow-md scale-105"
-                          : "bg-background hover:bg-muted text-muted-foreground"
-                      }`}
-                    >
-                      <span>{anim.icon}</span>
-                      <span className="hidden sm:inline">{anim.title}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Animation Content */}
-            <div className="p-6">
-              <div className="mb-4 text-center">
-                <h3 className="text-xl font-bold text-foreground">
-                  {currentAnimation?.title}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {currentAnimation?.description}
-                </p>
-              </div>
-
-              <div className="min-h-[400px]">
-                {currentAnimation?.component}
-              </div>
-
-              <div className="mt-6 text-center">
-                <p className="text-xs text-muted-foreground">
-                  💡 Die Animation läuft automatisch in einer Schleife. Keine Videos - 100% interaktive Web-Animation!
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 

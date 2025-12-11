@@ -272,3 +272,108 @@ Zum Vergleich: Ein 1080x1080 MP4-Video wäre 3-5 MB (1000x größer!)
 ---
 
 **Erstellt mit ❤️ für ExcelSkills**
+
+---
+
+## 🎬 Micro-Animationen (Detail-Seiten)
+
+Für jede Skill-Detail-Seite gibt es **4 kurze, fokussierte Micro-Animationen**:
+
+### Animation-Typen
+
+1. **🎬 INTRO** (12-15s) - Konzept-Überblick  
+   Erklärt **was** der Skill macht, ohne technische Details
+
+2. **📖 TUTORIAL** (25-30s) - Schritt-für-Schritt  
+   Zeigt **wie** der Skill funktioniert mit echter Formel
+
+3. **⚠️ ERROR** (10-12s) - Häufiger Fehler  
+   Demonstriert typische Fehler und deren Lösung
+
+4. **💡 TIP** (12-15s) - Pro-Tipp  
+   Advanced Tricks für bessere Nutzung
+
+### SVERWEIS Micro-Animationen
+
+#### VLookupIntro
+- Zwei Tabellen (Bestellungen ohne Preise, Preisliste mit Preisen)
+- Visualisierung der Datenverbindung
+- "Daten verbunden!" Success-Message
+
+#### VLookupError
+- Zeigt #NV Fehler
+- Highlightet Leerzeichen im Suchkriterium
+- Demonstriert Lösung (Leerzeichen entfernen)
+
+#### VLookupTip
+- Vergleich: Ohne $ vs Mit $
+- Zeigt Problem beim Kopieren ohne absolute Bezüge
+- Zeigt Lösung mit $B$2:$C$10
+- Bonus: F4-Tastenkombination Tipp
+
+### Verwendung in Detail-Seiten
+
+```tsx
+import { VLookupIntro } from '@/components/animations/micro/VLookupIntro';
+import { VLookupError } from '@/components/animations/micro/VLookupError';
+import { VLookupTip } from '@/components/animations/micro/VLookupTip';
+
+// In der Detail-Seite
+<section>
+  <h2>🎬 Was ist SVERWEIS?</h2>
+  <VLookupIntro />
+</section>
+
+<section>
+  <h2>⚠️ Häufige Fehler</h2>
+  <VLookupError />
+</section>
+
+<section>
+  <h2>💡 Pro-Tipps</h2>
+  <VLookupTip />
+</section>
+```
+
+### Detail-Seiten Struktur
+
+Jede Skill-Detail-Seite folgt diesem Template:
+
+1. **Hero** - Titel, Badges, Breadcrumb, CTA
+2. **Intro Animation** - Konzept verstehen
+3. **Erklärung** - Text: Was ist der Skill? Wofür nutzen?
+4. **Tutorial Animation** - Schritt-für-Schritt mit Formel
+5. **Syntax** - Code-Block mit Parametern
+6. **Pro-Tipps** - Tip Animation + zusätzliche Tipps
+7. **Fehler** - Error Animation + Fehlerliste
+8. **Related Skills** - Links zu ähnlichen Skills
+9. **CTA** - Zum Chatbot
+
+Siehe `/app/[locale]/skills/vlookup/page.tsx` als Referenz.
+
+---
+
+## 📊 Performance-Vergleich: Micro-Animationen vs Videos
+
+| Methode | Anzahl | Gesamt-Größe | Ladezeit | Wartung |
+|---------|--------|--------------|----------|---------|
+| **Web Micro-Animationen** | 4 | ~15 KB | <50ms | ✅ Einfach |
+| MP4 Videos | 4 | 12-20 MB | 3-10s | ❌ Aufwendig |
+
+**Ersparnis: ~800x kleinere Dateien!** 🚀
+
+---
+
+## 🔮 Roadmap: Weitere Detail-Seiten
+
+- [x] SVERWEIS Detail-Seite mit 4 Micro-Animationen
+- [ ] SUMMEWENN Detail-Seite
+- [ ] Bedingte Formatierung Detail-Seite
+- [ ] Pivot-Tabellen Detail-Seite
+- [ ] INDEX-VERGLEICH Detail-Seite
+- [ ] WENN-Funktion Detail-Seite
+- [ ] Filter & Sortieren Detail-Seite
+- [ ] Dropdown-Listen Detail-Seite
+
+**Ziel:** 32 Micro-Animationen (8 Skills × 4 Animationen)
+

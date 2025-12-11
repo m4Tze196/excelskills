@@ -5,6 +5,7 @@ import { VLookupPreview } from "@/components/animations/VLookupPreview";
 import { VLookupIntro } from "@/components/animations/micro/VLookupIntro";
 import { VLookupError } from "@/components/animations/micro/VLookupError";
 import { VLookupTip } from "@/components/animations/micro/VLookupTip";
+import { VLookupLiveDemo } from "@/components/skills/interactive/VLookupLiveDemo";
 
 export default function VLookupDetailPage() {
   return (
@@ -142,6 +143,42 @@ export default function VLookupDetailPage() {
               <div>
                 <div className="font-semibold text-sm text-blue-600 dark:text-blue-400">Bereich_Verweis</div>
                 <div className="text-sm text-slate-700 dark:text-slate-300">FALSCH = exakte Übereinstimmung (empfohlen), WAHR = ungefähre Übereinstimmung</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Live Demo */}
+      <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950 dark:via-indigo-950 dark:to-purple-950 py-12">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="mb-6 flex items-center gap-2">
+              <span className="text-2xl">🎮</span>
+              <h2 className="text-2xl font-bold">Probier es selbst!</h2>
+            </div>
+
+            <div className="mb-6">
+              <p className="text-slate-700 dark:text-slate-300">
+                Gib deine eigene SVERWEIS-Formel ein und sieh das Ergebnis in Echtzeit.
+                Experimentiere mit verschiedenen Parametern und erhalte sofortiges Feedback!
+              </p>
+            </div>
+
+            <VLookupLiveDemo />
+
+            <div className="mt-6 bg-blue-100 dark:bg-blue-900/30 border border-blue-300 dark:border-blue-700 rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <span className="text-2xl">💡</span>
+                <div>
+                  <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
+                    Lern-Tipp: Learning by Doing
+                  </h3>
+                  <p className="text-sm text-blue-800 dark:text-blue-200">
+                    Die beste Art Excel zu lernen ist durch Ausprobieren! Versuche die Formel
+                    selbst zu schreiben, bevor du den Hint anschaust. Fehler sind der beste Lehrer!
+                  </p>
+                </div>
               </div>
             </div>
           </div>

@@ -1,0 +1,193 @@
+{
+  "header": {
+    "brand": "ExcelSkills",
+    "skills": "Beceriler",
+    "courses": "Kurslar",
+    "aiAssistant": "Yapay Zeka Asistanı",
+    "getStarted": "Başlayın",
+    "language": "Dil"
+  },
+  "footer": {
+    "description": "Yapay zeka destekli rehberlik ve kapsamlı beceri dizini ile Excel'de ustalaşın.",
+    "skills": "Beceriler",
+    "browseAllSkills": "Tüm Becerilere Göz Atın",
+    "formulas": "Formüller",
+    "pivotTables": "Pivot Tablolar",
+    "dataAnalysis": "Veri Analizi",
+    "courses": "Kurslar",
+    "allCourses": "Tüm Kurslar",
+    "beginner": "Başlangıç",
+    "intermediate": "Orta",
+    "advanced": "İleri",
+    "resources": "Kaynaklar",
+    "aiAssistant": "Yapay Zeka Asistanı",
+    "about": "Hakkımızda",
+    "contact": "İletişim",
+    "allRightsReserved": "Tüm hakları saklıdır.",
+    "privacy": "Gizlilik",
+    "terms": "Şartlar"
+  },
+  "home": {
+    "hero": {
+      "title": "Excel'de ustalaşın",
+      "titleHighlight": "Yapay Zeka Destekli",
+      "titleEnd": "Rehberlik ile",
+      "description": "Kapsamlı beceri dizini, interaktif kurslar ve Excel'de başarılı olmanıza yardımcı olacak akıllı sohbet robotu.",
+      "tryAI": "Yapay Zeka Asistanını Deneyin",
+      "browseSkills": "Becerilere Göz Atın"
+    },
+    "features": {
+      "title": "Excel'de Ustalaşmak İçin İhtiyacınız Olan Her Şey",
+      "skillsDirectory": {
+        "title": "Beceri Dizini",
+        "description": "Kategori ve zorluk seviyesine göre düzenlenmiş, başlangıçtan ileri seviyeye kadar Excel becerilerinin kapsamlı kataloğu.",
+        "cta": "Becerileri Keşfedin"
+      },
+      "courses": {
+        "title": "İnteraktif Kurslar",
+        "description": "Uygulamalı pratik ve gerçek dünya örnekleriyle Excel uzmanlığınızı geliştirmek için tasarlanmış adım adım kurslar.",
+        "cta": "Kursları Görüntüle"
+      },
+      "aiAssistant": {
+        "title": "Yapay Zeka Asistanı",
+        "description": "Gelişmiş yapay zeka destekli akıllı sohbet robotumuzla Excel sorularınıza anında yanıtlar alın.",
+        "cta": "Sohbete Başlayın"
+      }
+    },
+    "cta": {
+      "title": "Excel Becerilerinizi Geliştirmeye Hazır mısınız?",
+      "description": "Kapsamlı platformumuzla Excel'de ustalaşan binlerce profesyonele katılın.",
+      "button": "Ücretsiz Başlayın"
+    }
+  },
+  "skills": {
+    "title": "Excel Beceri Dizini",
+    "description": "Kapsamlı Excel becerileri koleksiyonumuza göz atın. Başlangıç temellerinden ileri tekniklere kadar.",
+    "category": "Kategori",
+    "difficulty": "Zorluk",
+    "all": "Tümü",
+    "learnMore": "Daha Fazla Bilgi",
+    "cta": {
+      "title": "Belirli Bir Beceri İçin Yardıma mı İhtiyacınız Var?",
+      "description": "Kişiselleştirilmiş rehberlik ve Excel sorularınıza anında yanıtlar için yapay zeka asistanımıza sorun.",
+      "button": "Yapay Zeka Asistanına Sorun"
+    },
+    "categories": {
+      "formulas": "Formüller",
+      "dataAnalysis": "Veri Analizi",
+      "formatting": "Biçimlendirme",
+      "visualization": "Görselleştirme",
+      "dataManagement": "Veri Yönetimi",
+      "automation": "Otomasyon"
+    },
+    "levels": {
+      "beginner": "Başlangıç",
+      "intermediate": "Orta",
+      "advanced": "İleri"
+    },
+    "items": {
+      "vlookup": {
+        "title": "DÜŞEYARA",
+        "description": "Bir aralığın ilk sütununda bir değer arayın ve aynı satırdaki başka bir sütundan bir değer döndürün.",
+        "category": "Formüller"
+      },
+      "pivotTables": {
+        "title": "Pivot Tablolar",
+        "description": "Verilerinizi etkileşimli olarak analiz etmek ve keşfetmek için dinamik özet tablolar oluşturun.",
+        "category": "Veri Analizi"
+      },
+      "conditionalFormatting": {
+        "title": "Koşullu Biçimlendirme",
+        "description": "Önemli bilgileri vurgulamak için hücrelere değerlerine göre biçimlendirme uygulayın.",
+        "category": "Biçimlendirme"
+      },
+      "indexMatch": {
+        "title": "İNDEKS-EŞLEŞTİR",
+        "description": "Her yönde değer aramak için DÜŞEYARA'ya daha esnek bir alternatif.",
+        "category": "Formüller"
+      },
+      "powerQuery": {
+        "title": "Power Query",
+        "description": "Birden fazla kaynaktan verilere bağlanın, birleştirin ve iyileştirin.",
+        "category": "Veri Analizi"
+      },
+      "charts": {
+        "title": "Grafikler ve Çizimler",
+        "description": "Daha iyi içgörüler için verilerinizi çeşitli grafik türleriyle görselleştirin.",
+        "category": "Görselleştirme"
+      },
+      "sumif": {
+        "title": "EĞERTOPLA & ÇOKEĞERTOPLA",
+        "description": "Bir veya birden fazla kritere göre değerleri toplayın.",
+        "category": "Formüller"
+      },
+      "dataValidation": {
+        "title": "Veri Doğrulama",
+        "description": "Veri kalitesini korumak için hücrelere hangi verilerin girilebileceğini kontrol edin.",
+        "category": "Veri Yönetimi"
+      },
+      "macros": {
+        "title": "Makrolar ve VBA",
+        "description": "Kaydedilmiş makrolar ve VBA programlama ile tekrarlayan görevleri otomatikleştirin.",
+        "category": "Otomasyon"
+      }
+    }
+  },
+  "courses": {
+    "title": "Excel Kursları",
+    "description": "Sizi Excel acemisinden uzmana götürecek yapılandırılmış öğrenme yolları. Uygulamalı pratikle kendi hızınızda öğrenin.",
+    "stats": {
+      "courses": "Kurslar",
+      "lessons": "Dersler",
+      "students": "Öğrenciler",
+      "content": "İçerik"
+    },
+    "startCourse": "Kursa Başla",
+    "duration": "saat",
+    "lessons": "ders",
+    "cta": {
+      "title": "Nereden Başlayacağınızdan Emin Değil misiniz?",
+      "description": "Yapay zeka asistanımız, mevcut beceri seviyeniz ve öğrenme hedeflerinize göre doğru kursu seçmenize yardımcı olabilir.",
+      "button": "Kurs Önerileri Alın"
+    },
+    "items": {
+      "fundamentals": {
+        "title": "Excel Temelleri",
+        "description": "Excel yolculuğunuza temellerle başlayın. Gezinme, veri girişi, basit formüller ve biçimlendirmeyi öğrenin."
+      },
+      "formulas": {
+        "title": "Formüllerde ve Fonksiyonlarda Ustalaşma",
+        "description": "DÜŞEYARA, İNDEKS-EŞLEŞTİR, EĞERTOPLA ve daha gelişmiş fonksiyonlar dahil Excel formüllerine derinlemesine dalın."
+      },
+      "dataAnalysis": {
+        "title": "Excel ile Veri Analizi",
+        "description": "Pivot tablolar, grafikler, koşullu biçimlendirme ve istatistiksel fonksiyonlarla veri analizi yapmayı öğrenin."
+      },
+      "powerQuery": {
+        "title": "Power Query ve Power Pivot",
+        "description": "Gelişmiş analizler için Power Query ve Power Pivot ile verilerinizi dönüştürün ve modelleyin."
+      },
+      "dashboard": {
+        "title": "Gösterge Paneli ve Raporlama",
+        "description": "Gelişmiş grafik ve görselleştirme teknikleriyle profesyonel gösterge panelleri ve raporlar oluşturun."
+      },
+      "vba": {
+        "title": "VBA ve Otomasyon",
+        "description": "VBA programlama ile tekrarlayan görevleri otomatikleştirin ve özel çözümler oluşturun."
+      }
+    }
+  },
+  "chat": {
+    "title": "Excel Yapay Zeka Asistanı",
+    "description": "Sorular sorun, formüller alın, teknikler öğrenin ve Excel sorunlarını anında çözün.",
+    "placeholder": "Excel hakkında bana bir şey sorun...",
+    "send": "Gönder",
+    "keyboardHint": "Göndermek için Enter'a, yeni satır için Shift+Enter'a basın",
+    "greeting": "Merhaba! Ben Excel yapay zeka asistanınızım. Bana Excel formülleri, fonksiyonlar, veri analizi veya en iyi uygulamalar hakkında her şeyi sorabilirsiniz. Bugün size nasıl yardımcı olabilirim?",
+    "placeholderResponse": "Bu bir yer tutucu yanıttır. Ödeme entegrasyonlu yapay zeka sohbet robotu arka ucu bir sonraki aşamada uygulanacaktır. Şimdilik arayüzü keşfedebilir ve sohbet arayüzünün nasıl çalıştığını görebilirsiniz.",
+    "banner": {
+      "title": "Yer Tutucu Modu",
+      "description": "Bu bir kullanıcı arayüzü önizlemesidir. Arka uç entegrasyonu ve ödeme sistemi ile tam yapay zeka işlevselliği bir sonraki aşamada uygulanacaktır."
+    }
+  }
+}

@@ -1,0 +1,193 @@
+{
+  "header": {
+    "brand": "ExcelSkills",
+    "skills": "Compétences",
+    "courses": "Cours",
+    "aiAssistant": "Assistant IA",
+    "getStarted": "Commencer",
+    "language": "Langue"
+  },
+  "footer": {
+    "description": "Maîtrisez Excel avec des conseils alimentés par l'IA et un répertoire complet de compétences.",
+    "skills": "Compétences",
+    "browseAllSkills": "Parcourir toutes les compétences",
+    "formulas": "Formules",
+    "pivotTables": "Tableaux croisés dynamiques",
+    "dataAnalysis": "Analyse de données",
+    "courses": "Cours",
+    "allCourses": "Tous les cours",
+    "beginner": "Débutant",
+    "intermediate": "Intermédiaire",
+    "advanced": "Avancé",
+    "resources": "Ressources",
+    "aiAssistant": "Assistant IA",
+    "about": "À propos",
+    "contact": "Contact",
+    "allRightsReserved": "Tous droits réservés.",
+    "privacy": "Confidentialité",
+    "terms": "Conditions"
+  },
+  "home": {
+    "hero": {
+      "title": "Maîtrisez Excel avec des",
+      "titleHighlight": "conseils alimentés par l'IA",
+      "titleEnd": "",
+      "description": "Répertoire complet de compétences, cours interactifs et chatbot intelligent pour vous aider à exceller dans Excel.",
+      "tryAI": "Essayer l'assistant IA",
+      "browseSkills": "Parcourir les compétences"
+    },
+    "features": {
+      "title": "Tout ce dont vous avez besoin pour maîtriser Excel",
+      "skillsDirectory": {
+        "title": "Répertoire de compétences",
+        "description": "Catalogue complet de compétences Excel, du débutant à l'avancé, organisé par catégorie et difficulté.",
+        "cta": "Explorer les compétences"
+      },
+      "courses": {
+        "title": "Cours interactifs",
+        "description": "Cours étape par étape conçus pour développer votre expertise Excel avec des pratiques concrètes et des exemples réels.",
+        "cta": "Voir les cours"
+      },
+      "aiAssistant": {
+        "title": "Assistant IA",
+        "description": "Obtenez des réponses instantanées à vos questions Excel avec notre chatbot intelligent alimenté par une IA avancée.",
+        "cta": "Commencer à discuter"
+      }
+    },
+    "cta": {
+      "title": "Prêt à améliorer vos compétences Excel?",
+      "description": "Rejoignez des milliers de professionnels qui maîtrisent Excel avec notre plateforme complète.",
+      "button": "Commencer gratuitement"
+    }
+  },
+  "skills": {
+    "title": "Répertoire de compétences Excel",
+    "description": "Parcourez notre collection complète de compétences Excel. Des fondamentaux pour débutants aux techniques avancées.",
+    "category": "Catégorie",
+    "difficulty": "Difficulté",
+    "all": "Tous",
+    "learnMore": "En savoir plus",
+    "cta": {
+      "title": "Besoin d'aide pour une compétence spécifique?",
+      "description": "Demandez à notre assistant IA des conseils personnalisés et des réponses instantanées à vos questions Excel.",
+      "button": "Demander à l'assistant IA"
+    },
+    "categories": {
+      "formulas": "Formules",
+      "dataAnalysis": "Analyse de données",
+      "formatting": "Formatage",
+      "visualization": "Visualisation",
+      "dataManagement": "Gestion de données",
+      "automation": "Automatisation"
+    },
+    "levels": {
+      "beginner": "Débutant",
+      "intermediate": "Intermédiaire",
+      "advanced": "Avancé"
+    },
+    "items": {
+      "vlookup": {
+        "title": "RECHERCHEV",
+        "description": "Recherchez une valeur dans la première colonne d'une plage et renvoyez une valeur de la même ligne dans une autre colonne.",
+        "category": "Formules"
+      },
+      "pivotTables": {
+        "title": "Tableaux croisés dynamiques",
+        "description": "Créez des tableaux récapitulatifs dynamiques pour analyser et explorer vos données de manière interactive.",
+        "category": "Analyse de données"
+      },
+      "conditionalFormatting": {
+        "title": "Mise en forme conditionnelle",
+        "description": "Appliquez une mise en forme aux cellules en fonction de leurs valeurs pour mettre en évidence les informations importantes.",
+        "category": "Formatage"
+      },
+      "indexMatch": {
+        "title": "INDEX-EQUIV",
+        "description": "Une alternative plus flexible à RECHERCHEV pour rechercher des valeurs dans n'importe quelle direction.",
+        "category": "Formules"
+      },
+      "powerQuery": {
+        "title": "Power Query",
+        "description": "Connectez, combinez et affinez des données provenant de plusieurs sources.",
+        "category": "Analyse de données"
+      },
+      "charts": {
+        "title": "Graphiques et diagrammes",
+        "description": "Visualisez vos données avec différents types de graphiques pour de meilleures perspectives.",
+        "category": "Visualisation"
+      },
+      "sumif": {
+        "title": "SOMME.SI & SOMME.SI.ENS",
+        "description": "Additionnez des valeurs en fonction d'un ou plusieurs critères.",
+        "category": "Formules"
+      },
+      "dataValidation": {
+        "title": "Validation de données",
+        "description": "Contrôlez les données qui peuvent être saisies dans les cellules pour maintenir la qualité des données.",
+        "category": "Gestion de données"
+      },
+      "macros": {
+        "title": "Macros & VBA",
+        "description": "Automatisez les tâches répétitives avec des macros enregistrées et la programmation VBA.",
+        "category": "Automatisation"
+      }
+    }
+  },
+  "courses": {
+    "title": "Cours Excel",
+    "description": "Parcours d'apprentissage structurés pour vous faire passer de débutant à expert Excel. Apprenez à votre rythme avec des exercices pratiques.",
+    "stats": {
+      "courses": "Cours",
+      "lessons": "Leçons",
+      "students": "Étudiants",
+      "content": "Contenu"
+    },
+    "startCourse": "Commencer le cours",
+    "duration": "heures",
+    "lessons": "leçons",
+    "cta": {
+      "title": "Vous ne savez pas par où commencer?",
+      "description": "Notre assistant IA peut vous aider à choisir le bon cours en fonction de votre niveau actuel et de vos objectifs d'apprentissage.",
+      "button": "Obtenir des recommandations de cours"
+    },
+    "items": {
+      "fundamentals": {
+        "title": "Fondamentaux Excel",
+        "description": "Commencez votre parcours Excel avec les bases. Apprenez la navigation, la saisie de données, les formules simples et la mise en forme."
+      },
+      "formulas": {
+        "title": "Maîtriser les formules et fonctions",
+        "description": "Plongez dans les formules Excel, y compris RECHERCHEV, INDEX-EQUIV, SOMME.SI et des fonctions plus avancées."
+      },
+      "dataAnalysis": {
+        "title": "Analyse de données avec Excel",
+        "description": "Apprenez à analyser des données avec des tableaux croisés dynamiques, des graphiques, la mise en forme conditionnelle et des fonctions statistiques."
+      },
+      "powerQuery": {
+        "title": "Power Query & Power Pivot",
+        "description": "Transformez et modélisez vos données avec Power Query et Power Pivot pour des analyses avancées."
+      },
+      "dashboard": {
+        "title": "Tableaux de bord et reporting",
+        "description": "Créez des tableaux de bord et des rapports professionnels avec des techniques avancées de graphiques et de visualisation."
+      },
+      "vba": {
+        "title": "VBA et automatisation",
+        "description": "Automatisez les tâches répétitives et créez des solutions personnalisées avec la programmation VBA."
+      }
+    }
+  },
+  "chat": {
+    "title": "Assistant IA Excel",
+    "description": "Posez des questions, obtenez des formules, apprenez des techniques et résolvez des problèmes Excel instantanément.",
+    "placeholder": "Posez-moi des questions sur Excel...",
+    "send": "Envoyer",
+    "keyboardHint": "Appuyez sur Entrée pour envoyer, Maj+Entrée pour nouvelle ligne",
+    "greeting": "Bonjour! Je suis votre assistant IA Excel. Posez-moi des questions sur les formules Excel, les fonctions, l'analyse de données ou les meilleures pratiques. Comment puis-je vous aider aujourd'hui?",
+    "placeholderResponse": "Ceci est une réponse de remplacement. Le backend du chatbot IA avec intégration de paiement sera implémenté dans la prochaine phase. Pour l'instant, vous pouvez explorer l'interface utilisateur et voir comment fonctionne l'interface de chat.",
+    "banner": {
+      "title": "Mode de remplacement",
+      "description": "Ceci est un aperçu de l'interface utilisateur. La fonctionnalité IA complète avec intégration backend et système de paiement sera implémentée dans la prochaine phase."
+    }
+  }
+}

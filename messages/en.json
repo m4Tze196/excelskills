@@ -4,7 +4,8 @@
     "skills": "Skills",
     "courses": "Courses",
     "aiAssistant": "AI Assistant",
-    "getStarted": "Get Started"
+    "getStarted": "Get Started",
+    "language": "Language"
   },
   "footer": {
     "description": "Master Excel with AI-powered guidance and comprehensive skill directory.",
@@ -71,44 +72,6 @@
       "description": "Ask our AI assistant for personalized guidance and instant answers to your Excel questions.",
       "button": "Ask AI Assistant"
     },
-    "items": {
-      "vlookup": {
-        "title": "VLOOKUP",
-        "description": "Search for a value in the first column of a range and return a value in the same row from another column."
-      },
-      "pivotTables": {
-        "title": "Pivot Tables",
-        "description": "Create dynamic summary tables to analyze and explore your data interactively."
-      },
-      "conditionalFormatting": {
-        "title": "Conditional Formatting",
-        "description": "Apply formatting to cells based on their values to highlight important information."
-      },
-      "indexMatch": {
-        "title": "INDEX-MATCH",
-        "description": "A more flexible alternative to VLOOKUP for looking up values in any direction."
-      },
-      "powerQuery": {
-        "title": "Power Query",
-        "description": "Connect to, combine, and refine data from multiple sources."
-      },
-      "charts": {
-        "title": "Charts & Graphs",
-        "description": "Visualize your data with various chart types for better insights."
-      },
-      "sumif": {
-        "title": "SUMIF & SUMIFS",
-        "description": "Sum values based on one or multiple criteria."
-      },
-      "dataValidation": {
-        "title": "Data Validation",
-        "description": "Control what data can be entered into cells to maintain data quality."
-      },
-      "macros": {
-        "title": "Macros & VBA",
-        "description": "Automate repetitive tasks with recorded macros and VBA programming."
-      }
-    },
     "categories": {
       "formulas": "Formulas",
       "dataAnalysis": "Data Analysis",
@@ -121,6 +84,53 @@
       "beginner": "Beginner",
       "intermediate": "Intermediate",
       "advanced": "Advanced"
+    },
+    "items": {
+      "vlookup": {
+        "title": "VLOOKUP",
+        "description": "Search for a value in the first column of a range and return a value in the same row from another column.",
+        "category": "Formulas"
+      },
+      "pivotTables": {
+        "title": "Pivot Tables",
+        "description": "Create dynamic summary tables to analyze and explore your data interactively.",
+        "category": "Data Analysis"
+      },
+      "conditionalFormatting": {
+        "title": "Conditional Formatting",
+        "description": "Apply formatting to cells based on their values to highlight important information.",
+        "category": "Formatting"
+      },
+      "indexMatch": {
+        "title": "INDEX-MATCH",
+        "description": "A more flexible alternative to VLOOKUP for looking up values in any direction.",
+        "category": "Formulas"
+      },
+      "powerQuery": {
+        "title": "Power Query",
+        "description": "Connect to, combine, and refine data from multiple sources.",
+        "category": "Data Analysis"
+      },
+      "charts": {
+        "title": "Charts & Graphs",
+        "description": "Visualize your data with various chart types for better insights.",
+        "category": "Visualization"
+      },
+      "sumif": {
+        "title": "SUMIF & SUMIFS",
+        "description": "Sum values based on one or multiple criteria.",
+        "category": "Formulas"
+      },
+      "dataValidation": {
+        "title": "Data Validation",
+        "description": "Control what data can be entered into cells to maintain data quality.",
+        "category": "Data Management"
+      },
+      "macros": {
+        "title": "Macros & VBA",
+        "description": "Automate repetitive tasks with recorded macros and VBA programming.",
+        "category": "Automation"
+      }
     }
   },
   "courses": {
@@ -133,6 +143,8 @@
       "content": "Content"
     },
     "startCourse": "Start Course",
+    "duration": "hours",
+    "lessons": "lessons",
     "cta": {
       "title": "Not Sure Where to Start?",
       "description": "Our AI assistant can help you choose the right course based on your current skill level and learning goals.",
@@ -163,9 +175,6 @@
         "title": "VBA & Automation",
         "description": "Automate repetitive tasks and create custom solutions with VBA programming."
       }
-    },
-    "duration": {
-      "hours": "hours"
     }
   },
   "chat": {

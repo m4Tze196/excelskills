@@ -4,7 +4,8 @@
     "skills": "Skills",
     "courses": "Kurse",
     "aiAssistant": "KI-Assistent",
-    "getStarted": "Jetzt starten"
+    "getStarted": "Jetzt starten",
+    "language": "Sprache"
   },
   "footer": {
     "description": "Meistern Sie Excel mit KI-gestützter Anleitung und umfassendem Kompetenzverzeichnis.",
@@ -71,44 +72,6 @@
       "description": "Fragen Sie unseren KI-Assistenten für personalisierte Anleitung und sofortige Antworten auf Ihre Excel-Fragen.",
       "button": "KI-Assistent fragen"
     },
-    "items": {
-      "vlookup": {
-        "title": "SVERWEIS",
-        "description": "Suchen Sie nach einem Wert in der ersten Spalte eines Bereichs und geben Sie einen Wert in derselben Zeile aus einer anderen Spalte zurück."
-      },
-      "pivotTables": {
-        "title": "Pivot-Tabellen",
-        "description": "Erstellen Sie dynamische Zusammenfassungstabellen, um Ihre Daten interaktiv zu analysieren und zu erkunden."
-      },
-      "conditionalFormatting": {
-        "title": "Bedingte Formatierung",
-        "description": "Wenden Sie Formatierungen auf Zellen basierend auf ihren Werten an, um wichtige Informationen hervorzuheben."
-      },
-      "indexMatch": {
-        "title": "INDEX-VERGLEICH",
-        "description": "Eine flexiblere Alternative zu SVERWEIS zum Nachschlagen von Werten in jede Richtung."
-      },
-      "powerQuery": {
-        "title": "Power Query",
-        "description": "Verbinden, kombinieren und verfeinern Sie Daten aus mehreren Quellen."
-      },
-      "charts": {
-        "title": "Diagramme & Grafiken",
-        "description": "Visualisieren Sie Ihre Daten mit verschiedenen Diagrammtypen für bessere Einblicke."
-      },
-      "sumif": {
-        "title": "SUMMEWENN & SUMMEWENNS",
-        "description": "Summieren Sie Werte basierend auf einem oder mehreren Kriterien."
-      },
-      "dataValidation": {
-        "title": "Datenüberprüfung",
-        "description": "Kontrollieren Sie, welche Daten in Zellen eingegeben werden können, um die Datenqualität zu gewährleisten."
-      },
-      "macros": {
-        "title": "Makros & VBA",
-        "description": "Automatisieren Sie wiederkehrende Aufgaben mit aufgezeichneten Makros und VBA-Programmierung."
-      }
-    },
     "categories": {
       "formulas": "Formeln",
       "dataAnalysis": "Datenanalyse",
@@ -121,6 +84,53 @@
       "beginner": "Anfänger",
       "intermediate": "Fortgeschritten",
       "advanced": "Experte"
+    },
+    "items": {
+      "vlookup": {
+        "title": "SVERWEIS",
+        "description": "Suchen Sie nach einem Wert in der ersten Spalte eines Bereichs und geben Sie einen Wert in derselben Zeile aus einer anderen Spalte zurück.",
+        "category": "Formeln"
+      },
+      "pivotTables": {
+        "title": "Pivot-Tabellen",
+        "description": "Erstellen Sie dynamische Zusammenfassungstabellen, um Ihre Daten interaktiv zu analysieren und zu erkunden.",
+        "category": "Datenanalyse"
+      },
+      "conditionalFormatting": {
+        "title": "Bedingte Formatierung",
+        "description": "Wenden Sie Formatierungen auf Zellen basierend auf ihren Werten an, um wichtige Informationen hervorzuheben.",
+        "category": "Formatierung"
+      },
+      "indexMatch": {
+        "title": "INDEX-VERGLEICH",
+        "description": "Eine flexiblere Alternative zu SVERWEIS zum Nachschlagen von Werten in jede Richtung.",
+        "category": "Formeln"
+      },
+      "powerQuery": {
+        "title": "Power Query",
+        "description": "Verbinden, kombinieren und verfeinern Sie Daten aus mehreren Quellen.",
+        "category": "Datenanalyse"
+      },
+      "charts": {
+        "title": "Diagramme & Grafiken",
+        "description": "Visualisieren Sie Ihre Daten mit verschiedenen Diagrammtypen für bessere Einblicke.",
+        "category": "Visualisierung"
+      },
+      "sumif": {
+        "title": "SUMMEWENN & SUMMEWENNS",
+        "description": "Summieren Sie Werte basierend auf einem oder mehreren Kriterien.",
+        "category": "Formeln"
+      },
+      "dataValidation": {
+        "title": "Datenüberprüfung",
+        "description": "Kontrollieren Sie, welche Daten in Zellen eingegeben werden können, um die Datenqualität zu gewährleisten.",
+        "category": "Datenverwaltung"
+      },
+      "macros": {
+        "title": "Makros & VBA",
+        "description": "Automatisieren Sie wiederkehrende Aufgaben mit aufgezeichneten Makros und VBA-Programmierung.",
+        "category": "Automatisierung"
+      }
     }
   },
   "courses": {
@@ -133,6 +143,8 @@
       "content": "Inhalt"
     },
     "startCourse": "Kurs starten",
+    "duration": "Stunden",
+    "lessons": "Lektionen",
     "cta": {
       "title": "Nicht sicher, wo Sie anfangen sollen?",
       "description": "Unser KI-Assistent kann Ihnen helfen, den richtigen Kurs basierend auf Ihrem aktuellen Kenntnisstand und Ihren Lernzielen auszuwählen.",
@@ -163,9 +175,6 @@
         "title": "VBA & Automatisierung",
         "description": "Automatisieren Sie wiederkehrende Aufgaben und erstellen Sie benutzerdefinierte Lösungen mit VBA-Programmierung."
       }
-    },
-    "duration": {
-      "hours": "Stunden"
     }
   },
   "chat": {

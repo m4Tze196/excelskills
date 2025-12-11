@@ -1,30 +1,34 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useTheme } from "@/lib/theme-context";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { Link, usePathname, useRouter } from "@/i18n/routing";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const t = useTranslations("header");
+  const locale = useLocale();
+  const router = useRouter();
   const pathname = usePathname();
 
-  // Extract current locale from pathname
-  const currentLocale = pathname.split("/")[1] || "en";
-  const pathnameWithoutLocale = pathname.replace(`/${currentLocale}`, "") || "/";
+  const languages = [
+    { code: "en", name: "English" },
+    { code: "de", name: "Deutsch" },
+    { code: "fr", name: "Français" },
+    { code: "tr", name: "Türkçe" },
+  ];
 
   const switchLocale = (newLocale: string) => {
-    const newPath = `/${newLocale}${pathnameWithoutLocale}`;
-    window.location.href = newPath;
+    router.replace(pathname, { locale: newLocale });
+    setMobileMenuOpen(false);
   };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href={`/${currentLocale}`} className="flex items-center space-x-2">
+        <Link href="/" className="flex items-center space-x-2">
           <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             {t("brand")}
           </span>
@@ -33,25 +37,25 @@ export function Header() {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-6">
           <Link
-            href={`/${currentLocale}/skills`}
+            href="/skills"
             className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
           >
             {t("skills")}
           </Link>
           <Link
-            href={`/${currentLocale}/courses`}
+            href="/courses"
             className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
           >
             {t("courses")}
           </Link>
           <Link
-            href={`/${currentLocale}/chat`}
+            href="/chat"
             className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
           >
             {t("aiAssistant")}
           </Link>
           <Link
-            href={`/${currentLocale}/chat`}
+            href="/chat"
             className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
           >
             {t("getStarted")}
@@ -71,25 +75,22 @@ export function Header() {
               >
                 <path d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
               </svg>
-              <span className="text-sm font-medium uppercase">{currentLocale}</span>
+              <span className="text-sm font-medium uppercase">{locale}</span>
             </button>
-            <div className="absolute right-0 mt-2 w-32 bg-card border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-              <button
-                onClick={() => switchLocale("en")}
-                className={`w-full text-left px-4 py-2 text-sm hover:bg-muted rounded-t-lg ${
-                  currentLocale === "en" ? "font-semibold bg-muted" : ""
-                }`}
-              >
-                English
-              </button>
-              <button
-                onClick={() => switchLocale("de")}
-                className={`w-full text-left px-4 py-2 text-sm hover:bg-muted rounded-b-lg ${
-                  currentLocale === "de" ? "font-semibold bg-muted" : ""
-                }`}
-              >
-                Deutsch
-              </button>
+            <div className="absolute right-0 mt-2 w-40 bg-card border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+              {languages.map((lang, index) => (
+                <button
+                  key={lang.code}
+                  onClick={() => switchLocale(lang.code)}
+                  className={`w-full text-left px-4 py-2 text-sm hover:bg-muted transition-colors ${
+                    index === 0 ? "rounded-t-lg" : ""
+                  } ${index === languages.length - 1 ? "rounded-b-lg" : ""} ${
+                    locale === lang.code ? "font-semibold bg-muted" : ""
+                  }`}
+                >
+                  {lang.name}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -191,21 +192,21 @@ export function Header() {
         <div className="md:hidden border-t border-border/40 bg-background">
           <div className="container mx-auto py-4 px-4 flex flex-col space-y-3">
             <Link
-              href={`/${currentLocale}/skills`}
+              href="/skills"
               className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors py-2"
               onClick={() => setMobileMenuOpen(false)}
             >
               {t("skills")}
             </Link>
             <Link
-              href={`/${currentLocale}/courses`}
+              href="/courses"
               className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors py-2"
               onClick={() => setMobileMenuOpen(false)}
             >
               {t("courses")}
             </Link>
             <Link
-              href={`/${currentLocale}/chat`}
+              href="/chat"
               className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors py-2"
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -214,33 +215,26 @@ export function Header() {
 
             {/* Language Switcher Mobile */}
             <div className="border-t border-border/40 pt-3 mt-3">
-              <p className="text-xs font-semibold text-muted-foreground mb-2">Language</p>
-              <div className="flex space-x-2">
-                <button
-                  onClick={() => switchLocale("en")}
-                  className={`flex-1 px-3 py-2 text-sm rounded-lg border transition-colors ${
-                    currentLocale === "en"
-                      ? "bg-primary text-primary-foreground border-primary"
-                      : "bg-background border-border hover:bg-muted"
-                  }`}
-                >
-                  English
-                </button>
-                <button
-                  onClick={() => switchLocale("de")}
-                  className={`flex-1 px-3 py-2 text-sm rounded-lg border transition-colors ${
-                    currentLocale === "de"
-                      ? "bg-primary text-primary-foreground border-primary"
-                      : "bg-background border-border hover:bg-muted"
-                  }`}
-                >
-                  Deutsch
-                </button>
+              <p className="text-xs font-semibold text-muted-foreground mb-2">{t("language")}</p>
+              <div className="grid grid-cols-2 gap-2">
+                {languages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => switchLocale(lang.code)}
+                    className={`px-3 py-2 text-sm rounded-lg border transition-colors ${
+                      locale === lang.code
+                        ? "bg-primary text-primary-foreground border-primary"
+                        : "bg-background border-border hover:bg-muted"
+                    }`}
+                  >
+                    {lang.name}
+                  </button>
+                ))}
               </div>
             </div>
 
             <Link
-              href={`/${currentLocale}/chat`}
+              href="/chat"
               className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
+import { getAllSkills } from "@/lib/skills-data";
 
 export default function SkillsPage() {
   const t = useTranslations("skills");
@@ -10,63 +11,8 @@ export default function SkillsPage() {
   const [selectedDifficulty, setSelectedDifficulty] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Skills data structure with metadata
-  const skills = [
-    {
-      id: "vlookup",
-      category: "formulas",
-      difficulty: "intermediate",
-      icon: "🔍",
-    },
-    {
-      id: "pivotTables",
-      category: "dataAnalysis",
-      difficulty: "intermediate",
-      icon: "📊",
-    },
-    {
-      id: "conditionalFormatting",
-      category: "formatting",
-      difficulty: "beginner",
-      icon: "🎨",
-    },
-    {
-      id: "indexMatch",
-      category: "formulas",
-      difficulty: "advanced",
-      icon: "🎯",
-    },
-    {
-      id: "powerQuery",
-      category: "dataAnalysis",
-      difficulty: "advanced",
-      icon: "⚡",
-    },
-    {
-      id: "charts",
-      category: "visualization",
-      difficulty: "beginner",
-      icon: "📈",
-    },
-    {
-      id: "sumif",
-      category: "formulas",
-      difficulty: "beginner",
-      icon: "➕",
-    },
-    {
-      id: "dataValidation",
-      category: "dataManagement",
-      difficulty: "intermediate",
-      icon: "✅",
-    },
-    {
-      id: "macros",
-      category: "automation",
-      difficulty: "advanced",
-      icon: "🤖",
-    },
-  ];
+  // Get all skills from data structure
+  const allSkills = getAllSkills();
 
   const categories = [
     "all",
@@ -81,19 +27,15 @@ export default function SkillsPage() {
   const difficulties = ["all", "beginner", "intermediate", "advanced"];
 
   // Filter skills based on selections
-  const filteredSkills = skills.filter((skill) => {
+  const filteredSkills = allSkills.filter((skill) => {
     const categoryMatch =
       selectedCategory === "all" || skill.category === selectedCategory;
     const difficultyMatch =
       selectedDifficulty === "all" || skill.difficulty === selectedDifficulty;
     const searchMatch =
       searchQuery === "" ||
-      t(`items.${skill.id}.title`)
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase()) ||
-      t(`items.${skill.id}.description`)
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase());
+      skill.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      skill.description.toLowerCase().includes(searchQuery.toLowerCase());
 
     return categoryMatch && difficultyMatch && searchMatch;
   });
@@ -218,8 +160,8 @@ export default function SkillsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredSkills.map((skill) => (
                 <Link
-                  key={skill.id}
-                  href={`/skills/${skill.id}`}
+                  key={skill.slug}
+                  href={`/skills/${skill.slug}`}
                   className="group bg-card rounded-lg p-6 border border-border hover:border-primary/50 transition-all hover:shadow-lg hover:-translate-y-1"
                 >
                   {/* Icon */}
@@ -229,12 +171,12 @@ export default function SkillsPage() {
 
                   {/* Title */}
                   <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
-                    {t(`items.${skill.id}.title`)}
+                    {skill.title}
                   </h3>
 
                   {/* Description */}
                   <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
-                    {t(`items.${skill.id}.description`)}
+                    {skill.description}
                   </p>
 
                   {/* Metadata */}

@@ -3,5 +3,11 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "regions": ["fra1"]
+  "regions": ["fra1"],
+  "env": {
+    "NEXT_PUBLIC_BASE_PRICE": "0.05",
+    "NEXT_PUBLIC_MAX_PRICE": "0.50",
+    "RATE_LIMIT_MAX_REQUESTS": "10",
+    "RATE_LIMIT_WINDOW_MS": "3600000"
+  }
 }

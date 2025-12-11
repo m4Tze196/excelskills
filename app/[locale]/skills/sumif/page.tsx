@@ -26,7 +26,7 @@ export default function SumIfDetailPage() {
 
             <div className="space-y-4">
               <div className="flex items-center gap-3 flex-wrap">
-                <h1 className="text-4xl md:text-5xl font-bold">SUMMEWENN</h1>
+                <h1 className="text-4xl md:text-5xl font-bold">SUMMEWENN & SUMMEWENNS</h1>
                 <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium">
                   Anfänger
                 </span>
@@ -36,7 +36,7 @@ export default function SumIfDetailPage() {
               </div>
 
               <p className="text-xl text-blue-100">
-                Summiere nur die Werte, die eine bestimmte Bedingung erfüllen - perfekt für bedingte Berechnungen
+                Summiere nur die Werte, die eine oder mehrere Bedingungen erfüllen - perfekt für bedingte Berechnungen
               </p>
 
               <div className="flex items-center gap-4 pt-2">
@@ -67,10 +67,11 @@ export default function SumIfDetailPage() {
       <section className="bg-slate-50 dark:bg-slate-900 py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold mb-6">💡 Wofür brauchst du SUMMEWENN?</h2>
+            <h2 className="text-2xl font-bold mb-6">💡 Wofür brauchst du SUMMEWENN & SUMMEWENNS?</h2>
             <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed mb-8">
               SUMMEWENN (auf Englisch: SUMIF) addiert nur die Zahlen, die eine bestimmte Bedingung erfüllen.
-              Perfekt wenn du z.B. nur Umsätze einer bestimmten Kategorie oder Zeitperiode summieren willst.
+              SUMMEWENNS (SUMIFS) erweitert dies auf mehrere Bedingungen gleichzeitig.
+              Perfekt wenn du z.B. nur Umsätze einer bestimmten Kategorie UND Region summieren willst.
             </p>
 
             <div className="grid md:grid-cols-2 gap-6">
@@ -80,10 +81,10 @@ export default function SumIfDetailPage() {
                   Perfekt für:
                 </h3>
                 <ul className="space-y-2 text-sm">
-                  <li>• Umsätze pro Kategorie berechnen</li>
+                  <li>• Umsätze pro Kategorie berechnen (SUMMEWENN)</li>
                   <li>• Ausgaben eines Monats summieren</li>
-                  <li>• Verkäufe pro Region addieren</li>
-                  <li>• Kosten nach Abteilung gruppieren</li>
+                  <li>• Verkäufe pro Region UND Produkt (SUMMEWENNS)</li>
+                  <li>• Kosten nach Abteilung und Zeitraum gruppieren</li>
                 </ul>
               </div>
 
@@ -155,8 +156,8 @@ export default function SumIfDetailPage() {
 
             <div className="mb-6">
               <p className="text-slate-700 dark:text-slate-300">
-                Gib deine eigene SUMMEWENN-Formel ein und sieh das Ergebnis in Echtzeit.
-                Experimentiere mit verschiedenen Parametern und erhalte sofortiges Feedback!
+                Wähle zwischen SUMMEWENN (1 Bedingung) und SUMMEWENNS (mehrere Bedingungen) und gib deine Formel ein.
+                Sieh das Ergebnis in Echtzeit und erhalte sofortiges Feedback!
               </p>
             </div>
 

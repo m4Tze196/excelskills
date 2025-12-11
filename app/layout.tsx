@@ -1,16 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// Note: Using system fonts due to build environment restrictions
+// Replace with Google Fonts when deploying to production
+const fontVariables = "font-sans";
+const monoFontVariables = "font-mono";
 
 export const metadata: Metadata = {
   title: "ExcelSkills - Excel lernen mit KI-gestützter Anleitung | Excel Tutorials",
@@ -69,8 +63,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col antialiased">
+    <html lang="en" suppressHydrationWarning>
+      <body className="min-h-screen flex flex-col antialiased font-sans">
         {children}
       </body>
     </html>

@@ -22,3 +22,8 @@ export { PivotTableTip } from "./PivotTableTip";
 export { IndexMatchIntro } from "./IndexMatchIntro";
 export { IndexMatchError } from "./IndexMatchError";
 export { IndexMatchTip } from "./IndexMatchTip";
+
+// Datenüberprüfung Micro-Animationen
+export { DataValidationIntro } from "./DataValidationIntro";
+export { DataValidationError } from "./DataValidationError";
+export { DataValidationTip } from "./DataValidationTip";

@@ -324,7 +324,7 @@ export function SumIfLiveDemo() {
               </code>
             </p>
             {mode === "sumif" ? (
-              <p className={`text-xs ${mode === "sumif" ? "text-blue-700 dark:text-blue-300" : "text-purple-700 dark:text-purple-300"} mt-2`}>
+              <p className="text-xs text-blue-700 dark:text-blue-300 mt-2">
                 • <strong>A:A</strong> = Kategorie-Spalte (wo gesucht wird)
                 <br />
                 • <strong>"Elektronik"</strong> = Suchkriterium (immer in Anführungszeichen!)
@@ -332,7 +332,7 @@ export function SumIfLiveDemo() {
                 • <strong>C:C</strong> = Betrags-Spalte (was summiert wird)
               </p>
             ) : (
-              <p className={`text-xs ${mode === "sumif" ? "text-blue-700 dark:text-blue-300" : "text-purple-700 dark:text-purple-300"} mt-2`}>
+              <p className="text-xs text-purple-700 dark:text-purple-300 mt-2">
                 • <strong>C:C</strong> = Betrags-Spalte (was summiert wird - kommt zuerst!)
                 <br />
                 • <strong>A:A;"Elektronik"</strong> = 1. Bedingung (Kategorie = Elektronik)

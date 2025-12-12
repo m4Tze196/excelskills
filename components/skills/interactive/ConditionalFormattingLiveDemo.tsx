@@ -65,7 +65,7 @@ export function ConditionalFormattingLiveDemo() {
     }
   };
 
-  const getCellColor = (value: number): string | null => {
+  const getCellColor = (value: number): "green" | "orange" | "red" | "blue" | "purple" | null => {
     // Apply rules in order (first matching rule wins)
     for (const rule of rules) {
       if (evaluateRule(value, rule)) {

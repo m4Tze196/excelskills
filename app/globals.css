@@ -32,6 +32,13 @@
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
+  /* Remove 3D text-shadow effect from input fields */
+  input,
+  textarea,
+  select {
+    text-shadow: none !important;
+  }
+
   .dark {
     --color-background: oklch(0.1294 0.0118 285);
     --color-foreground: oklch(0.9789 0.0082 121);

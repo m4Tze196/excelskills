@@ -65,7 +65,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+    <html lang="de" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const path = window.location.pathname;
+                const locale = path.split('/')[1];
+                if (['en', 'de', 'fr', 'tr'].includes(locale)) {
+                  document.documentElement.lang = locale;
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-screen flex flex-col antialiased">
         {children}
       </body>

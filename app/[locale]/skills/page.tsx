@@ -1,91 +1,18 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { useState } from "react";
-import {
-  SkillPreviewCard,
-  VLookupIcon,
-  PivotTableIcon,
-  ConditionalFormattingIcon,
-  IndexMatchIcon,
-  ChartsIcon,
-  SumIfIcon,
-  DataValidationIcon,
-  MacrosIcon,
-  PowerQueryIcon,
-} from "@/components/animations/SkillPreviewCard";
+import { getAllSkills } from "@/lib/skills-data";
 
 export default function SkillsPage() {
   const t = useTranslations("skills");
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [selectedLevel, setSelectedLevel] = useState<string>("all");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedDifficulty, setSelectedDifficulty] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const skills = [
-    {
-      id: "vlookup",
-      icon: <VLookupIcon />,
-      color: "primary" as const,
-      level: "intermediate",
-      category: "formulas",
-    },
-    {
-      id: "pivotTables",
-      icon: <PivotTableIcon />,
-      color: "secondary" as const,
-      level: "intermediate",
-      category: "dataAnalysis",
-    },
-    {
-      id: "conditionalFormatting",
-      icon: <ConditionalFormattingIcon />,
-      color: "success" as const,
-      level: "beginner",
-      category: "formatting",
-    },
-    {
-      id: "indexMatch",
-      icon: <IndexMatchIcon />,
-      color: "info" as const,
-      level: "advanced",
-      category: "formulas",
-    },
-    {
-      id: "powerQuery",
-      icon: <PowerQueryIcon />,
-      color: "warning" as const,
-      level: "advanced",
-      category: "dataAnalysis",
-    },
-    {
-      id: "charts",
-      icon: <ChartsIcon />,
-      color: "info" as const,
-      level: "intermediate",
-      category: "visualization",
-    },
-    {
-      id: "sumif",
-      icon: <SumIfIcon />,
-      color: "primary" as const,
-      level: "beginner",
-      category: "formulas",
-    },
-    {
-      id: "dataValidation",
-      icon: <DataValidationIcon />,
-      color: "secondary" as const,
-      level: "intermediate",
-      category: "dataManagement",
-    },
-    {
-      id: "macros",
-      icon: <MacrosIcon />,
-      color: "danger" as const,
-      level: "advanced",
-      category: "automation",
-    },
-  ];
+  // Get all skills from data structure
+  const allSkills = getAllSkills();
 
   const categories = [
     "all",
@@ -97,74 +24,124 @@ export default function SkillsPage() {
     "automation",
   ];
 
-  const levels = ["all", "beginner", "intermediate", "advanced"];
+  const difficulties = ["all", "beginner", "intermediate", "advanced"];
 
-  const filteredSkills = skills.filter((skill) => {
-    const categoryMatch = selectedCategory === "all" || skill.category === selectedCategory;
-    const levelMatch = selectedLevel === "all" || skill.level === selectedLevel;
-    return categoryMatch && levelMatch;
+  // Filter skills based on selections
+  const filteredSkills = allSkills.filter((skill) => {
+    const categoryMatch =
+      selectedCategory === "all" || skill.category === selectedCategory;
+    const difficultyMatch =
+      selectedDifficulty === "all" || skill.difficulty === selectedDifficulty;
+    const searchMatch =
+      searchQuery === "" ||
+      skill.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      skill.description.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return categoryMatch && difficultyMatch && searchMatch;
   });
 
+  // Get difficulty badge color
+  const getDifficultyColor = (difficulty: string) => {
+    switch (difficulty) {
+      case "beginner":
+        return "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400";
+      case "intermediate":
+        return "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400";
+      case "advanced":
+        return "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400";
+      default:
+        return "bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-400";
+    }
+  };
+
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-12 md:py-20">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-            {t("title")}
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground">
-            {t("description")}
-          </p>
+    <div className="flex flex-col">
+      {/* Breadcrumb */}
+      <section className="border-b border-border/40 bg-muted/30">
+        <div className="container mx-auto px-4 py-3">
+          <nav className="flex items-center space-x-2 text-sm text-muted-foreground">
+            <Link href="/" className="hover:text-foreground transition-colors">
+              Home
+            </Link>
+            <span>/</span>
+            <span className="text-foreground font-medium">{t("title")}</span>
+          </nav>
         </div>
       </section>
 
-      {/* Filters */}
-      <section className="container mx-auto px-4 pb-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="bg-card rounded-lg border border-border p-6 space-y-4">
+      {/* Hero Section */}
+      <section className="container mx-auto px-4 py-12 md:py-20">
+        <div className="max-w-4xl mx-auto text-center space-y-4">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              {t("title")}
+            </span>
+          </h1>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            {t("description")}
+          </p>
+        </div>
+
+        {/* Search and Filters */}
+        <div className="max-w-5xl mx-auto mt-12 space-y-4">
+          {/* Search Bar */}
+          <div className="relative">
+            <svg
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input
+              type="text"
+              placeholder="Search skills..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-12 pr-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/50"
+            />
+          </div>
+
+          {/* Filters */}
+          <div className="grid md:grid-cols-2 gap-4">
             {/* Category Filter */}
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-foreground">
+              <label className="text-sm font-medium text-muted-foreground">
                 {t("category")}
               </label>
-              <div className="flex flex-wrap gap-2">
-                {categories.map((category) => (
-                  <button
-                    key={category}
-                    onClick={() => setSelectedCategory(category)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                      selectedCategory === category
-                        ? "bg-primary text-primary-foreground shadow-md"
-                        : "bg-muted text-muted-foreground hover:bg-muted/80"
-                    }`}
-                  >
-                    {category === "all" ? t("all") : t(`categories.${category}`)}
-                  </button>
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="w-full px-4 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/50"
+              >
+                {categories.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat === "all" ? t("all") : t(`categories.${cat}`)}
+                  </option>
                 ))}
-              </div>
+              </select>
             </div>
 
-            {/* Level Filter */}
+            {/* Difficulty Filter */}
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-foreground">
+              <label className="text-sm font-medium text-muted-foreground">
                 {t("difficulty")}
               </label>
-              <div className="flex flex-wrap gap-2">
-                {levels.map((level) => (
-                  <button
-                    key={level}
-                    onClick={() => setSelectedLevel(level)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                      selectedLevel === level
-                        ? "bg-secondary text-secondary-foreground shadow-md"
-                        : "bg-muted text-muted-foreground hover:bg-muted/80"
-                    }`}
-                  >
-                    {level === "all" ? t("all") : t(`levels.${level}`)}
-                  </button>
+              <select
+                value={selectedDifficulty}
+                onChange={(e) => setSelectedDifficulty(e.target.value)}
+                className="w-full px-4 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/50"
+              >
+                {difficulties.map((diff) => (
+                  <option key={diff} value={diff}>
+                    {diff === "all" ? t("all") : t(`levels.${diff}`)}
+                  </option>
                 ))}
-              </div>
+              </select>
             </div>
           </div>
         </div>
@@ -172,47 +149,73 @@ export default function SkillsPage() {
 
       {/* Skills Grid */}
       <section className="container mx-auto px-4 pb-20">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredSkills.map((skill) => (
-              <Link key={skill.id} href={`/skills/${skill.id}`}>
-                <SkillPreviewCard
-                  icon={skill.icon}
-                  title={t(`items.${skill.id}.title`)}
-                  description={t(`items.${skill.id}.description`)}
-                  category={t(`items.${skill.id}.category`)}
-                  level={t(`levels.${skill.level}`)}
-                  color={skill.color}
-                />
-              </Link>
-            ))}
-          </div>
-
-          {filteredSkills.length === 0 && (
+        <div className="max-w-7xl mx-auto">
+          {filteredSkills.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-muted-foreground text-lg">
-                Keine Skills gefunden. Versuche andere Filter.
+              <p className="text-muted-foreground">
+                No skills found matching your filters.
               </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredSkills.map((skill) => (
+                <Link
+                  key={skill.slug}
+                  href={`/skills/${skill.slug}`}
+                  className="group bg-card rounded-lg p-6 border border-border hover:border-primary/50 transition-all hover:shadow-lg hover:-translate-y-1"
+                >
+                  {/* Icon */}
+                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">
+                    {skill.icon}
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
+                    {skill.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
+                    {skill.description}
+                  </p>
+
+                  {/* Metadata */}
+                  <div className="flex items-center justify-between">
+                    <span
+                      className={`text-xs px-2 py-1 rounded-full font-medium ${getDifficultyColor(
+                        skill.difficulty
+                      )}`}
+                    >
+                      {t(`levels.${skill.difficulty}`)}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      {t(`categories.${skill.category}`)}
+                    </span>
+                  </div>
+                </Link>
+              ))}
             </div>
           )}
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="container mx-auto px-4 pb-20">
-        <div className="max-w-4xl mx-auto bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 rounded-2xl p-12 text-center border border-border">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            {t("cta.title")}
-          </h2>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            {t("cta.description")}
-          </p>
-          <Link
-            href="/chat"
-            className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-base font-medium text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg"
-          >
-            {t("cta.button")}
-          </Link>
+      <section className="border-t border-border/40 bg-muted/30">
+        <div className="container mx-auto px-4 py-16">
+          <div className="max-w-4xl mx-auto bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 rounded-2xl p-8 md:p-12 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              {t("cta.title")}
+            </h2>
+            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+              {t("cta.description")}
+            </p>
+            <Link
+              href="/chat"
+              className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-base font-medium text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg"
+            >
+              {t("cta.button")}
+            </Link>
+          </div>
         </div>
       </section>
     </div>

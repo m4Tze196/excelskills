@@ -49,6 +49,12 @@ export function Header() {
             {t("courses")}
           </Link>
           <Link
+            href="/shortcuts"
+            className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+          >
+            {t("shortcuts")}
+          </Link>
+          <Link
             href="/chat"
             className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
           >
@@ -204,6 +210,13 @@ export function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               {t("courses")}
+            </Link>
+            <Link
+              href="/shortcuts"
+              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {t("shortcuts")}
             </Link>
             <Link
               href="/chat"

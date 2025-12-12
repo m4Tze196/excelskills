@@ -12,3 +12,13 @@ export { ConditionalFormattingTip } from "./ConditionalFormattingTip";
 export { SumIfIntro } from "./SumIfIntro";
 export { SumIfError } from "./SumIfError";
 export { SumIfTip } from "./SumIfTip";
+
+// Pivot-Tabellen Micro-Animationen
+export { PivotTableIntro } from "./PivotTableIntro";
+export { PivotTableError } from "./PivotTableError";
+export { PivotTableTip } from "./PivotTableTip";
+
+// INDEX/VERGLEICH Micro-Animationen
+export { IndexMatchIntro } from "./IndexMatchIntro";
+export { IndexMatchError } from "./IndexMatchError";
+export { IndexMatchTip } from "./IndexMatchTip";

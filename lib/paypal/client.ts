@@ -5,13 +5,13 @@
  * Uses Sandbox for development, Production for live payments
  */
 
-import { PayPalClient } from '@paypal/paypal-server-sdk'
+import { Client } from '@paypal/paypal-server-sdk'
 
 /**
  * Create PayPal client instance
  * Automatically uses Sandbox or Production based on environment
  */
-export function createPayPalClient(): PayPalClient {
+export function createPayPalClient(): Client {
   const environment = process.env.NEXT_PUBLIC_PAYPAL_ENV || 'sandbox'
 
   const clientId = environment === 'production'
@@ -28,7 +28,7 @@ export function createPayPalClient(): PayPalClient {
     )
   }
 
-  return new PayPalClient({
+  return new Client({
     clientCredentialsAuthCredentials: {
       oAuthClientId: clientId,
       oAuthClientSecret: clientSecret,

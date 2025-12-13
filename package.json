@@ -11,12 +11,17 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.2",
+    "@paypal/paypal-server-sdk": "^2.1.0",
+    "@supabase/auth-helpers-nextjs": "^0.15.0",
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.87.1",
     "@tailwindcss/postcss": "^4.1.17",
     "@types/node": "^24.10.2",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.22",
     "clsx": "^2.1.1",
+    "dotenv": "^17.2.3",
     "eslint": "^9.39.1",
     "eslint-config-next": "^16.0.8",
     "next": "^16.0.8",
@@ -27,5 +32,8 @@
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.17",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0"
   }
 }

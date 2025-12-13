@@ -1,7 +1,10 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/server";
 
 // Rate limiting storage (in-memory for MVP)
+// TODO: Move to Supabase rate_limits table
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 
 // Pricing per 1K tokens
@@ -41,6 +44,20 @@ function calculateCost(inputTokens: number, outputTokens: number): number {
 
 export async function POST(request: NextRequest) {
   try {
+    // Step 1: Authenticate user
+    const supabase = await createClient();
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      return NextResponse.json(
+        { error: "Unauthorized", message: "Please log in to use the chat" },
+        { status: 401 }
+      );
+    }
+
     const ip = request.headers.get("x-forwarded-for") || "unknown";
 
     // Check rate limit
@@ -65,6 +82,33 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: "Message is required" },
         { status: 400 }
+      );
+    }
+
+    // Step 2: Check user's credit balance
+    const { data: profile, error: profileError } = await supabase
+      .from("user_profiles")
+      .select("credits_remaining")
+      .eq("id", user.id)
+      .single();
+
+    if (profileError || !profile) {
+      return NextResponse.json(
+        { error: "User profile not found" },
+        { status: 404 }
+      );
+    }
+
+    // Minimum credits required (estimated)
+    const MIN_CREDITS_REQUIRED = 0.05; // ~$0.05 minimum
+    if (profile.credits_remaining < MIN_CREDITS_REQUIRED) {
+      return NextResponse.json(
+        {
+          error: "Insufficient credits",
+          message: `You need at least ${MIN_CREDITS_REQUIRED} credits. Your balance: ${profile.credits_remaining.toFixed(2)}`,
+          credits_remaining: profile.credits_remaining,
+        },
+        { status: 402 } // Payment Required
       );
     }
 
@@ -109,6 +153,59 @@ export async function POST(request: NextRequest) {
     const outputTokens = response.usage.output_tokens;
     const cost = calculateCost(inputTokens, outputTokens);
 
+    // Step 3: Deduct credits from user's balance
+    // Use admin client to bypass RLS for credit deduction
+    const adminSupabase = createAdminClient();
+
+    // Create transaction record first
+    const { data: transaction, error: transactionError } = await adminSupabase
+      .from("transactions")
+      .insert({
+        user_id: user.id,
+        type: "usage",
+        credits_amount: -cost, // Negative for deduction
+        status: "completed",
+        payment_provider: "anthropic",
+        metadata: {
+          input_tokens: inputTokens,
+          output_tokens: outputTokens,
+          model: "claude-3-5-sonnet-20241022",
+          message_preview: message.substring(0, 100),
+        },
+      })
+      .select()
+      .single();
+
+    if (transactionError) {
+      console.error("Failed to create transaction:", transactionError);
+      // Don't fail the request, just log the error
+    }
+
+    // Deduct credits using the database function
+    if (transaction) {
+      const { error: deductError } = await adminSupabase.rpc("deduct_credits", {
+        p_user_id: user.id,
+        p_credits_amount: cost,
+        p_transaction_id: transaction.id,
+      });
+
+      if (deductError) {
+        console.error("Failed to deduct credits:", deductError);
+        // Mark transaction as failed
+        await adminSupabase
+          .from("transactions")
+          .update({ status: "failed" })
+          .eq("id", transaction.id);
+      }
+    }
+
+    // Get updated balance
+    const { data: updatedProfile } = await supabase
+      .from("user_profiles")
+      .select("credits_remaining")
+      .eq("id", user.id)
+      .single();
+
     // Extract response text
     const responseText =
       response.content[0].type === "text" ? response.content[0].text : "";
@@ -121,6 +218,7 @@ export async function POST(request: NextRequest) {
         totalTokens: inputTokens + outputTokens,
       },
       cost,
+      credits_remaining: updatedProfile?.credits_remaining || profile.credits_remaining,
     });
   } catch (error: any) {
     console.error("Chat API Error:", error);

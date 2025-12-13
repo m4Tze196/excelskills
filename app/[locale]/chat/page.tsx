@@ -1,8 +1,19 @@
 "use client";
 
+/**
+ * Chat Page - AI Excel Assistant
+ *
+ * Integrated with Supabase for:
+ * - User authentication
+ * - Credit balance management
+ * - Transaction logging
+ */
+
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { getCredits, deductCredits, addCredits, CREDIT_PACKAGES } from "@/lib/credits";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+import type { User } from "@supabase/supabase-js";
 
 type Message = {
   id: string;
@@ -14,28 +25,66 @@ type Message = {
 
 export default function ChatPage() {
   const t = useTranslations("chat");
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "1",
-      role: "assistant",
-      content: t("greeting"),
-      timestamp: new Date(),
-    },
-  ]);
+  const router = useRouter();
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [credits, setCredits] = useState({ total: 0, used: 0, remaining: 0 });
-  const [showCreditsModal, setShowCreditsModal] = useState(false);
+  const [creditsRemaining, setCreditsRemaining] = useState(0);
+  const [showBuyCreditsModal, setShowBuyCreditsModal] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
+  // Check authentication on mount
   useEffect(() => {
-    setCredits(getCredits());
-  }, []);
+    async function checkAuth() {
+      const supabase = createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        // Redirect to login
+        router.push("/auth/login");
+        return;
+      }
+
+      setUser(user);
+
+      // Fetch initial credit balance
+      const { data: profile } = await supabase
+        .from("user_profiles")
+        .select("credits_remaining")
+        .eq("id", user.id)
+        .single();
+
+      if (profile) {
+        setCreditsRemaining(profile.credits_remaining);
+      }
+
+      // Show welcome message
+      setMessages([
+        {
+          id: "1",
+          role: "assistant",
+          content: t("greeting"),
+          timestamp: new Date(),
+        },
+      ]);
+
+      setLoading(false);
+    }
+
+    checkAuth();
+  }, [router, t]);
 
   const handleSend = async () => {
-    if (!input.trim() || isTyping) return;
+    if (!input.trim() || isTyping || !user) return;
 
-    if (credits.remaining < 0.01) {
-      setShowCreditsModal(true);
+    // Check if user has enough credits
+    const MIN_CREDITS_REQUIRED = 0.05;
+    if (creditsRemaining < MIN_CREDITS_REQUIRED) {
+      setShowBuyCreditsModal(true);
       return;
     }
 
@@ -49,6 +98,7 @@ export default function ChatPage() {
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsTyping(true);
+    setError(null);
 
     try {
       const response = await fetch("/api/chat", {
@@ -66,37 +116,40 @@ export default function ChatPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Failed to get response");
+        if (response.status === 401) {
+          // User not authenticated
+          router.push("/auth/login");
+          return;
+        }
+        if (response.status === 402) {
+          // Insufficient credits
+          setShowBuyCreditsModal(true);
+          setIsTyping(false);
+          return;
+        }
+        throw new Error(data.message || data.error || "Failed to get response");
       }
 
-      const cost = data.cost || 0.01;
-      const success = deductCredits(cost, `Chat: ${input.slice(0, 50)}`);
-
-      if (!success) {
-        setShowCreditsModal(true);
-        setIsTyping(false);
-        return;
+      // Update credit balance from response
+      if (data.credits_remaining !== undefined) {
+        setCreditsRemaining(data.credits_remaining);
       }
 
-      setCredits(getCredits());
-
-      const aiMessage: Message = {
+      const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
         content: data.response,
         timestamp: new Date(),
-        cost,
+        cost: data.cost,
       };
 
-      setMessages((prev) => [...prev, aiMessage]);
-    } catch (error: any) {
-      const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content: `Error: ${error.message}. Please try again.`,
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, errorMessage]);
+      setMessages((prev) => [...prev, assistantMessage]);
+    } catch (err: any) {
+      console.error("Chat error:", err);
+      setError(err.message || "Failed to send message. Please try again.");
+
+      // Remove the user message if request failed
+      setMessages((prev) => prev.filter((m) => m.id !== userMessage.id));
     } finally {
       setIsTyping(false);
     }
@@ -109,153 +162,172 @@ export default function ChatPage() {
     }
   };
 
-  const handlePurchase = (packageId: string) => {
-    const pkg = CREDIT_PACKAGES.find((p) => p.id === packageId);
-    if (pkg) {
-      addCredits(pkg.credits, `Purchased ${pkg.name}`);
-      setCredits(getCredits());
-      setShowCreditsModal(false);
-      alert(`Added ${pkg.credits} credits! (Demo - no payment required)`);
-    }
-  };
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-center">
+          <div className="mb-4 inline-block h-12 w-12 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-5xl">
-      <div className="flex flex-col h-[calc(100vh-12rem)]">
-        <div className="mb-6 flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">{t("title")}</h1>
-            <p className="text-muted-foreground">{t("description")}</p>
-          </div>
-          <div className="text-right">
-            <div className="text-sm text-muted-foreground">Credits</div>
-            <div className="text-2xl font-bold text-primary">
-              ${credits.remaining.toFixed(2)}
+    <div className="flex min-h-screen flex-col">
+      {/* Header with credits */}
+      <div className="sticky top-16 z-10 border-b border-border bg-background/95 backdrop-blur">
+        <div className="container mx-auto flex items-center justify-between px-4 py-3">
+          <h1 className="text-xl font-semibold">{t("title")}</h1>
+          <div className="flex items-center gap-4">
+            <div className="text-right">
+              <div className="text-xs text-muted-foreground">Credits</div>
+              <div className="text-sm font-semibold">
+                {creditsRemaining.toFixed(2)}€
+              </div>
             </div>
             <button
-              onClick={() => setShowCreditsModal(true)}
-              className="text-xs text-primary hover:underline mt-1"
+              onClick={() => setShowBuyCreditsModal(true)}
+              className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
             >
-              Buy more
+              Buy Credits
             </button>
-          </div>
-        </div>
-
-        <div className="flex-1 bg-card border border-border rounded-lg flex flex-col overflow-hidden shadow-lg">
-          <div className="flex-1 overflow-y-auto p-6 space-y-6">
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
-              >
-                <div
-                  className={`max-w-[80%] md:max-w-[70%] rounded-lg p-4 ${
-                    message.role === "user"
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-muted text-foreground"
-                  }`}
-                >
-                  <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-                  <div className="flex items-center justify-between mt-2">
-                    <span
-                      className={`text-xs ${
-                        message.role === "user"
-                          ? "text-primary-foreground/70"
-                          : "text-muted-foreground"
-                      }`}
-                    >
-                      {message.timestamp.toLocaleTimeString([], {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </span>
-                    {message.cost && (
-                      <span className="text-xs text-muted-foreground ml-2">
-                        -${message.cost.toFixed(4)}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-
-            {isTyping && (
-              <div className="flex justify-start">
-                <div className="max-w-[80%] rounded-lg p-4 bg-muted">
-                  <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce delay-100"></div>
-                    <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce delay-200"></div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="border-t border-border p-4 bg-background">
-            <div className="flex space-x-2">
-              <textarea
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder={t("placeholder")}
-                className="flex-1 resize-none rounded-lg border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                rows={1}
-                disabled={isTyping}
-              />
-              <button
-                onClick={handleSend}
-                disabled={!input.trim() || isTyping}
-                className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm"
-              >
-                {t("send")}
-              </button>
-            </div>
-            <p className="text-xs text-muted-foreground mt-2">{t("keyboardHint")}</p>
           </div>
         </div>
       </div>
 
-      {showCreditsModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-card rounded-lg max-w-2xl w-full p-6">
-            <h2 className="text-2xl font-bold mb-4">Buy Credits</h2>
-            <div className="grid md:grid-cols-3 gap-4 mb-6">
-              {CREDIT_PACKAGES.map((pkg) => (
-                <div
-                  key={pkg.id}
-                  className={`border rounded-lg p-4 ${
-                    pkg.popular ? "border-primary border-2" : "border-border"
-                  }`}
-                >
-                  {pkg.popular && (
-                    <span className="bg-primary text-primary-foreground text-xs px-2 py-1 rounded">
-                      Popular
-                    </span>
-                  )}
-                  <h3 className="text-lg font-semibold mt-2">{pkg.name}</h3>
-                  <div className="text-3xl font-bold my-2">${pkg.price}</div>
-                  <div className="text-sm text-muted-foreground mb-4">
-                    {pkg.credits} credits
-                    {pkg.savings && (
-                      <span className="text-primary ml-2">Save {pkg.savings}</span>
-                    )}
-                  </div>
-                  <button
-                    onClick={() => handlePurchase(pkg.id)}
-                    className="w-full bg-primary text-primary-foreground rounded-lg py-2 hover:bg-primary/90"
-                  >
-                    Buy Now (Demo)
-                  </button>
-                </div>
-              ))}
-            </div>
-            <button
-              onClick={() => setShowCreditsModal(false)}
-              className="w-full border border-border rounded-lg py-2 hover:bg-muted"
+      {/* Chat messages */}
+      <div className="container mx-auto flex-1 overflow-y-auto px-4 py-6">
+        <div className="mx-auto max-w-3xl space-y-6">
+          {messages.map((message) => (
+            <div
+              key={message.id}
+              className={`flex ${
+                message.role === "user" ? "justify-end" : "justify-start"
+              }`}
             >
-              Close
-            </button>
+              <div
+                className={`max-w-[80%] rounded-lg p-4 ${
+                  message.role === "user"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted"
+                }`}
+              >
+                <div className="whitespace-pre-wrap break-words">
+                  {message.content}
+                </div>
+                <div className="mt-2 flex items-center gap-2 text-xs opacity-70">
+                  <span>{message.timestamp.toLocaleTimeString()}</span>
+                  {message.cost && (
+                    <span>• Cost: ${message.cost.toFixed(4)}</span>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+
+          {isTyping && (
+            <div className="flex justify-start">
+              <div className="max-w-[80%] rounded-lg bg-muted p-4">
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 animate-bounce rounded-full bg-foreground/50"></div>
+                  <div className="h-2 w-2 animate-bounce rounded-full bg-foreground/50 [animation-delay:0.2s]"></div>
+                  <div className="h-2 w-2 animate-bounce rounded-full bg-foreground/50 [animation-delay:0.4s]"></div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Error message */}
+      {error && (
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-3xl rounded-lg border border-red-500 bg-red-50 p-3 text-sm text-red-700 dark:bg-red-950/30 dark:text-red-400">
+            <strong>Error:</strong> {error}
+          </div>
+        </div>
+      )}
+
+      {/* Input area */}
+      <div className="sticky bottom-0 border-t border-border bg-background/95 backdrop-blur">
+        <div className="container mx-auto px-4 py-4">
+          <div className="mx-auto max-w-3xl">
+            <div className="flex gap-2">
+              <textarea
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyPress}
+                placeholder={t("placeholder")}
+                className="flex-1 rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                rows={1}
+                style={{
+                  resize: "none",
+                  minHeight: "52px",
+                  maxHeight: "200px",
+                }}
+              />
+              <button
+                onClick={handleSend}
+                disabled={!input.trim() || isTyping}
+                className="rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {isTyping ? "..." : t("send")}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Buy Credits Modal */}
+      {showBuyCreditsModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="max-w-2xl rounded-xl border border-border bg-card p-6 shadow-2xl">
+            <h2 className="mb-4 text-2xl font-bold">Insufficient Credits</h2>
+            <p className="mb-6 text-muted-foreground">
+              You need more credits to continue chatting. Purchase credits to
+              keep using the AI assistant.
+            </p>
+
+            <div className="mb-6 grid gap-4 sm:grid-cols-3">
+              {/* Credit packages - placeholder for now */}
+              <div className="rounded-lg border border-border p-4">
+                <div className="text-2xl font-bold">5€</div>
+                <div className="text-sm text-muted-foreground">
+                  ~100 messages
+                </div>
+              </div>
+              <div className="rounded-lg border-2 border-primary p-4">
+                <div className="mb-1 text-xs font-semibold uppercase text-primary">
+                  Popular
+                </div>
+                <div className="text-2xl font-bold">10€</div>
+                <div className="text-sm text-muted-foreground">
+                  ~200 messages
+                </div>
+              </div>
+              <div className="rounded-lg border border-border p-4">
+                <div className="text-2xl font-bold">25€</div>
+                <div className="text-sm text-muted-foreground">
+                  ~500 messages
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => router.push("/payment")}
+                className="flex-1 rounded-lg bg-primary px-4 py-3 font-semibold text-primary-foreground hover:bg-primary/90"
+              >
+                Buy Credits
+              </button>
+              <button
+                onClick={() => setShowBuyCreditsModal(false)}
+                className="rounded-lg border border-border px-4 py-3 font-semibold hover:bg-muted"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       )}

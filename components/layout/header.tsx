@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTheme } from "@/lib/theme-context";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
+import { UserAccountDropdown } from "@/components/auth/UserAccountDropdown";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -54,11 +55,12 @@ export function Header() {
           >
             {t("aiAssistant")}
           </Link>
+
           <Link
-            href="/chat"
-            className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+            href="/shortcuts"
+            className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
           >
-            {t("getStarted")}
+            Shortcuts
           </Link>
 
           {/* Language Switcher */}
@@ -126,6 +128,9 @@ export function Header() {
               </svg>
             )}
           </button>
+
+          {/* User Account / Auth */}
+          <UserAccountDropdown locale={locale} />
         </div>
 
         {/* Mobile Menu Button */}

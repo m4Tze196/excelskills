@@ -11,13 +11,23 @@ import { resolve } from 'path'
 
 config({ path: resolve(__dirname, '../.env.local') })
 
-import { createAdminClient } from '../lib/supabase/server'
+import { createClient } from '@supabase/supabase-js'
 
 async function testConnection() {
   console.log('🔍 Testing Supabase connection...\n')
 
   try {
-    const supabase = createAdminClient()
+    // Create a simple Supabase client for testing
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      {
+        auth: {
+          autoRefreshToken: false,
+          persistSession: false
+        }
+      }
+    )
 
     // Test 1: Check connection
     console.log('✅ Step 1: Admin client created successfully')
